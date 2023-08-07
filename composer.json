@@ -11,5 +11,7 @@
             "email": "57554583+Midhanya-real@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+      "ext-pdo": "*"
+    }
 }
