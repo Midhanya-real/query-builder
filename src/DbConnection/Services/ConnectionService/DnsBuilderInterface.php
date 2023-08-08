@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Services\ConnectionService;
+namespace App\DbConnection\Services\ConnectionService;
+
+use App\DbConnection\Config\DnsConfig;
 
 interface DnsBuilderInterface
 {
@@ -12,5 +14,5 @@ interface DnsBuilderInterface
 
     public function setDbName(string $dbName): static;
 
-    public function getDns(): string;
+    public function getDns(): DnsConfig;
 }

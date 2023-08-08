@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Config;
+namespace App\DbConnection\Config;
 
-class Config
+class DBConfig
 {
     private string $db;
 
@@ -26,9 +26,9 @@ class Config
 
     /**
      * @param string $db
-     * @return Config
+     * @return DBConfig
      */
-    public function setDb(string $db): Config
+    public function setDb(string $db): DBConfig
     {
         $this->db = $db;
 
@@ -45,9 +45,9 @@ class Config
 
     /**
      * @param string $host
-     * @return Config
+     * @return DBConfig
      */
-    public function setHost(string $host): Config
+    public function setHost(string $host): DBConfig
     {
         $this->host = $host;
 
@@ -64,9 +64,9 @@ class Config
 
     /**
      * @param string $port
-     * @return Config
+     * @return DBConfig
      */
-    public function setPort(string $port): Config
+    public function setPort(string $port): DBConfig
     {
         $this->port = $port;
 
@@ -83,9 +83,9 @@ class Config
 
     /**
      * @param string $dbName
-     * @return Config
+     * @return DBConfig
      */
-    public function setDbName(string $dbName): Config
+    public function setDbName(string $dbName): DBConfig
     {
         $this->dbName = $dbName;
 
@@ -102,9 +102,9 @@ class Config
 
     /**
      * @param string $user
-     * @return Config
+     * @return DBConfig
      */
-    public function setUser(string $user): Config
+    public function setUser(string $user): DBConfig
     {
         $this->user = $user;
 
@@ -121,9 +121,9 @@ class Config
 
     /**
      * @param string $pass
-     * @return Config
+     * @return DBConfig
      */
-    public function setPass(string $pass): Config
+    public function setPass(string $pass): DBConfig
     {
         $this->pass = $pass;
 
