@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Connections;
+namespace App\DbConnection\Connections;
 
 use PDO;
 

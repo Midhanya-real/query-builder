@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Config;
+namespace App\DbConnection\Config;
 
-class Config
+use App\DbConnection\Config\Interfaces\AccessDataInterface;
+use App\DbConnection\Config\Interfaces\DnsInterface;
+
+class DBConfig implements DnsInterface, AccessDataInterface
 {
-    private string $db;
+    private string $driver;
 
     private string $host;
 
@@ -19,18 +22,18 @@ class Config
     /**
      * @return string
      */
-    public function getDb(): string
+    public function getDriver(): string
     {
-        return $this->db;
+        return $this->driver;
     }
 
     /**
-     * @param string $db
-     * @return Config
+     * @param string $driver
+     * @return DBConfig
      */
-    public function setDb(string $db): Config
+    public function setDriver(string $driver): static
     {
-        $this->db = $db;
+        $this->driver = $driver;
 
         return $this;
     }
@@ -45,9 +48,9 @@ class Config
 
     /**
      * @param string $host
-     * @return Config
+     * @return DBConfig
      */
-    public function setHost(string $host): Config
+    public function setHost(string $host): static
     {
         $this->host = $host;
 
@@ -64,9 +67,9 @@ class Config
 
     /**
      * @param string $port
-     * @return Config
+     * @return DBConfig
      */
-    public function setPort(string $port): Config
+    public function setPort(string $port): static
     {
         $this->port = $port;
 
@@ -83,9 +86,9 @@ class Config
 
     /**
      * @param string $dbName
-     * @return Config
+     * @return DBConfig
      */
-    public function setDbName(string $dbName): Config
+    public function setDbName(string $dbName): static
     {
         $this->dbName = $dbName;
 
@@ -102,9 +105,9 @@ class Config
 
     /**
      * @param string $user
-     * @return Config
+     * @return DBConfig
      */
-    public function setUser(string $user): Config
+    public function setUser(string $user): static
     {
         $this->user = $user;
 
@@ -121,9 +124,9 @@ class Config
 
     /**
      * @param string $pass
-     * @return Config
+     * @return DBConfig
      */
-    public function setPass(string $pass): Config
+    public function setPass(string $pass): static
     {
         $this->pass = $pass;
 
