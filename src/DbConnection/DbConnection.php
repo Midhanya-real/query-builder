@@ -7,8 +7,23 @@ use App\DbConnection\Config\DnsConfig;
 use App\DbConnection\Connections\Connection;
 use App\DbConnection\Services\ConnectionService\DnsBuilder;
 
-class DbConnection
+final class DbConnection
 {
+    private static ?DbConnection $connection;
+
+    private function __construct()
+    {
+    }
+
+    public static function getInstance(): ?DbConnection
+    {
+        if (is_null(self::$connection)) {
+            self::$connection = new DbConnection();
+        }
+
+        return self::$connection;
+    }
+
     private function setConfig(): DBConfig
     {
         $config = new DBConfig();
