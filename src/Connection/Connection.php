@@ -1,32 +1,32 @@
 <?php
 
-namespace App\DbConnection;
+namespace App\Connection;
 
-use App\DbConnection\Config\DBConfig;
-use App\DbConnection\Config\DnsConfig;
-use App\DbConnection\Connections\Connection;
-use App\DbConnection\Services\ConnectionService\DnsBuilder;
+use App\Connection\Config\DbConfig;
+use App\Connection\Config\DnsConfig;
+use App\Connection\Connections\PDOConnection;
+use App\Connection\Services\ConnectionService\DnsBuilder;
 
-final class DbConnection
+final class Connection
 {
-    private static ?DbConnection $connection;
+    private static ?Connection $connection;
 
     private function __construct()
     {
     }
 
-    public static function getInstance(): ?DbConnection
+    public static function getInstance(): ?Connection
     {
         if (is_null(self::$connection)) {
-            self::$connection = new DbConnection();
+            self::$connection = new Connection();
         }
 
         return self::$connection;
     }
 
-    private function setConfig(): DBConfig
+    private function setConfig(): DbConfig
     {
-        $config = new DBConfig();
+        $config = new DbConfig();
 
         $config->setDriver($_ENV['DB_CONNECTION_DRIVER']);
         $config->setHost($_ENV['DB_HOST']);
@@ -38,7 +38,7 @@ final class DbConnection
         return $config;
     }
 
-    private function setDns(DBConfig $config): DnsConfig
+    private function setDns(DbConfig $config): DnsConfig
     {
         $dns = new DnsConfig();
         $dnsBuilder = new DnsBuilder($dns);
@@ -51,11 +51,11 @@ final class DbConnection
             ->getDns();
     }
 
-    public function getConnection(): Connection
+    public function getConnection(): PDOConnection
     {
         $config = $this->setConfig();
         $dns = $this->setDns($config);
 
-        return new Connection($config, $dns);
+        return new PDOConnection($config, $dns);
     }
 }

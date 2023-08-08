@@ -1,11 +1,11 @@
 <?php
 
-namespace App\DbConnection\Config;
+namespace App\Connection\Config;
 
-use App\DbConnection\Config\Interfaces\AccessDataInterface;
-use App\DbConnection\Config\Interfaces\DnsInterface;
+use App\Connection\Config\Interfaces\AccessDataInterface;
+use App\Connection\Config\Interfaces\DnsInterface;
 
-class DBConfig implements DnsInterface, AccessDataInterface
+class DbConfig implements DnsInterface, AccessDataInterface
 {
     private string $driver;
 
@@ -29,7 +29,7 @@ class DBConfig implements DnsInterface, AccessDataInterface
 
     /**
      * @param string $driver
-     * @return DBConfig
+     * @return DbConfig
      */
     public function setDriver(string $driver): static
     {
@@ -48,7 +48,7 @@ class DBConfig implements DnsInterface, AccessDataInterface
 
     /**
      * @param string $host
-     * @return DBConfig
+     * @return DbConfig
      */
     public function setHost(string $host): static
     {
@@ -67,7 +67,7 @@ class DBConfig implements DnsInterface, AccessDataInterface
 
     /**
      * @param string $port
-     * @return DBConfig
+     * @return DbConfig
      */
     public function setPort(string $port): static
     {
@@ -86,7 +86,7 @@ class DBConfig implements DnsInterface, AccessDataInterface
 
     /**
      * @param string $dbName
-     * @return DBConfig
+     * @return DbConfig
      */
     public function setDbName(string $dbName): static
     {
@@ -105,7 +105,7 @@ class DBConfig implements DnsInterface, AccessDataInterface
 
     /**
      * @param string $user
-     * @return DBConfig
+     * @return DbConfig
      */
     public function setUser(string $user): static
     {
@@ -124,7 +124,7 @@ class DBConfig implements DnsInterface, AccessDataInterface
 
     /**
      * @param string $pass
-     * @return DBConfig
+     * @return DbConfig
      */
     public function setPass(string $pass): static
     {

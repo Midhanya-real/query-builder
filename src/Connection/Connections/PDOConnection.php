@@ -1,15 +1,15 @@
 <?php
 
-namespace App\DbConnection\Connections;
+namespace App\Connection\Connections;
 
-use App\DbConnection\Config\DBConfig;
-use App\DbConnection\Config\DnsConfig;
+use App\Connection\Config\DbConfig;
+use App\Connection\Config\DnsConfig;
 use PDO;
 
-class Connection implements ConnectionInterface
+class PDOConnection implements ConnectionInterface
 {
     public function __construct(
-        private readonly DBConfig  $config,
+        private readonly DbConfig  $config,
         private readonly DnsConfig $dns,
     )
     {

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\DbConnection\Services\ConnectionService;
+namespace App\Connection\Services\ConnectionService;
 
-use App\DbConnection\Config\DnsConfig;
-use App\DbConnection\Config\Enums\DnsParams;
+use App\Connection\Config\DnsConfig;
+use App\Connection\Config\Enums\DnsParams;
 
 class DnsBuilder implements DnsBuilderInterface
 {

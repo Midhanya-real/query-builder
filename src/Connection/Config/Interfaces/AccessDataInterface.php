@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DbConnection\Config\Interfaces;
+namespace App\Connection\Config\Interfaces;
 
 interface AccessDataInterface
 {

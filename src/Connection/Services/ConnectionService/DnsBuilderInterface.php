@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DbConnection\Services\ConnectionService;
+namespace App\Connection\Services\ConnectionService;
 
-use App\DbConnection\Config\DnsConfig;
+use App\Connection\Config\DnsConfig;
 
 interface DnsBuilderInterface
 {

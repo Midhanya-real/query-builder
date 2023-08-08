@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DbConnection\Config\Enums;
+namespace App\Connection\Config\Enums;
 
 enum DnsParams: string
 {

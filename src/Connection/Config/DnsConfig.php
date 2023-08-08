@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DbConnection\Config;
+namespace App\Connection\Config;
 
-use App\DbConnection\Config\Interfaces\DnsInterface;
+use App\Connection\Config\Interfaces\DnsInterface;
 
 class DnsConfig implements DnsInterface
 {
