@@ -4,7 +4,7 @@ namespace App\DbConnection\Config;
 
 class DBConfig
 {
-    private string $db;
+    private string $dbDriver;
 
     private string $host;
 
@@ -19,18 +19,18 @@ class DBConfig
     /**
      * @return string
      */
-    public function getDb(): string
+    public function getDbDriver(): string
     {
-        return $this->db;
+        return $this->dbDriver;
     }
 
     /**
-     * @param string $db
+     * @param string $dbDriver
      * @return DBConfig
      */
-    public function setDb(string $db): DBConfig
+    public function setDbDriver(string $dbDriver): DBConfig
     {
-        $this->db = $db;
+        $this->dbDriver = $dbDriver;
 
         return $this;
     }
