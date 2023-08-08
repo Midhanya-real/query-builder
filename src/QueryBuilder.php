@@ -8,6 +8,6 @@ class QueryBuilder
 {
     public function getDataBase(): DbConnection
     {
-        return new DbConnection();
+        return DbConnection::getInstance();
     }
 }
