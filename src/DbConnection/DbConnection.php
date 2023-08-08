@@ -4,6 +4,7 @@ namespace App\DbConnection;
 
 use App\DbConnection\Config\DBConfig;
 use App\DbConnection\Config\DnsConfig;
+use App\DbConnection\Connections\Connection;
 use App\DbConnection\Services\ConnectionService\DnsBuilder;
 
 class DbConnection
@@ -35,11 +36,11 @@ class DbConnection
             ->getDns();
     }
 
-    public function getConnection(): DbConnection
+    public function getConnection(): Connection
     {
         $config = $this->setConfig();
         $dns = $this->setDns($config);
 
-        return new DbConnection($config, $dns);
+        return new Connection($config, $dns);
     }
 }
