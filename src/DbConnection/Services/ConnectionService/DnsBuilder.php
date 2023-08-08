@@ -15,7 +15,7 @@ class DnsBuilder implements DnsBuilderInterface
 
     public function setDb(string $db): static
     {
-        $this->dns->setConnection($db);
+        $this->dns->setDriver($db);
 
         return $this;
     }

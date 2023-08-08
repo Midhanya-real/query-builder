@@ -13,7 +13,7 @@ class DbConnection
     {
         $config = new DBConfig();
 
-        $config->setDbDriver($_ENV['DB_CONNECTION_DRIVER']);
+        $config->setDriver($_ENV['DB_CONNECTION_DRIVER']);
         $config->setHost($_ENV['DB_HOST']);
         $config->setPort($_ENV['DB_PORT']);
         $config->setDbName($_ENV['DB_NAME']);
@@ -29,7 +29,7 @@ class DbConnection
         $dnsBuilder = new DnsBuilder($dns);
 
         return $dnsBuilder
-            ->setDb(db: $config->getDbDriver())
+            ->setDb(db: $config->getDriver())
             ->setHost(host: $config->getHost())
             ->setPort(port: $config->getPort())
             ->setDbName(dbName: $config->getDbName())

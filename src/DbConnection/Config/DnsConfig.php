@@ -2,9 +2,11 @@
 
 namespace App\DbConnection\Config;
 
-class DnsConfig
+use App\DbConnection\Config\Interfaces\DnsInterface;
+
+class DnsConfig implements DnsInterface
 {
-    private string $connection;
+    private string $driver;
 
     private string $host;
 
@@ -13,12 +15,12 @@ class DnsConfig
     private string $dbName;
 
     /**
-     * @param string $connection
+     * @param string $driver
      * @return DnsConfig
      */
-    public function setConnection(string $connection): DnsConfig
+    public function setDriver(string $driver): static
     {
-        $this->connection = $connection;
+        $this->driver = $driver;
 
         return $this;
     }
@@ -26,16 +28,16 @@ class DnsConfig
     /**
      * @return string
      */
-    public function getConnection(): string
+    public function getDriver(): string
     {
-        return $this->connection;
+        return $this->driver;
     }
 
     /**
      * @param string $host
      * @return DnsConfig
      */
-    public function setHost(string $host): DnsConfig
+    public function setHost(string $host): static
     {
         $this->host = $host;
 
@@ -54,7 +56,7 @@ class DnsConfig
      * @param string $port
      * @return DnsConfig
      */
-    public function setPort(string $port): DnsConfig
+    public function setPort(string $port): static
     {
         $this->port = $port;
 
@@ -73,7 +75,7 @@ class DnsConfig
      * @param string $dbName
      * @return DnsConfig
      */
-    public function setDbName(string $dbName): DnsConfig
+    public function setDbName(string $dbName): static
     {
         $this->dbName = $dbName;
 
@@ -90,7 +92,7 @@ class DnsConfig
 
     public function getDns(): string
     {
-        return $this->getConnection()
+        return $this->getDriver()
             . $this->getHost()
             . $this->getPort()
             . $this->getDbName();

@@ -2,9 +2,12 @@
 
 namespace App\DbConnection\Config;
 
-class DBConfig
+use App\DbConnection\Config\Interfaces\AccessDataInterface;
+use App\DbConnection\Config\Interfaces\DnsInterface;
+
+class DBConfig implements DnsInterface, AccessDataInterface
 {
-    private string $dbDriver;
+    private string $driver;
 
     private string $host;
 
@@ -19,18 +22,18 @@ class DBConfig
     /**
      * @return string
      */
-    public function getDbDriver(): string
+    public function getDriver(): string
     {
-        return $this->dbDriver;
+        return $this->driver;
     }
 
     /**
-     * @param string $dbDriver
+     * @param string $driver
      * @return DBConfig
      */
-    public function setDbDriver(string $dbDriver): DBConfig
+    public function setDriver(string $driver): static
     {
-        $this->dbDriver = $dbDriver;
+        $this->driver = $driver;
 
         return $this;
     }
@@ -47,7 +50,7 @@ class DBConfig
      * @param string $host
      * @return DBConfig
      */
-    public function setHost(string $host): DBConfig
+    public function setHost(string $host): static
     {
         $this->host = $host;
 
@@ -66,7 +69,7 @@ class DBConfig
      * @param string $port
      * @return DBConfig
      */
-    public function setPort(string $port): DBConfig
+    public function setPort(string $port): static
     {
         $this->port = $port;
 
@@ -85,7 +88,7 @@ class DBConfig
      * @param string $dbName
      * @return DBConfig
      */
-    public function setDbName(string $dbName): DBConfig
+    public function setDbName(string $dbName): static
     {
         $this->dbName = $dbName;
 
@@ -104,7 +107,7 @@ class DBConfig
      * @param string $user
      * @return DBConfig
      */
-    public function setUser(string $user): DBConfig
+    public function setUser(string $user): static
     {
         $this->user = $user;
 
@@ -123,7 +126,7 @@ class DBConfig
      * @param string $pass
      * @return DBConfig
      */
-    public function setPass(string $pass): DBConfig
+    public function setPass(string $pass): static
     {
         $this->pass = $pass;
 
