@@ -1,11 +1,11 @@
 <?php
 
-namespace App\DataBaseBuilders\Services\QueryBuilderService;
+namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
 use App\DataBaseBuilders\DataBases\Enums\TableAliases;
 use App\DataBaseBuilders\DataBases\Model\Query;
 
-class SelectBuilder
+class RawDeleteBuilder implements RawBuilderInterface
 {
     private string $rowQuery = '';
 
@@ -15,28 +15,31 @@ class SelectBuilder
     {
     }
 
-    public function getMethod(): static
+    public function setMethod(): static
     {
         $this->rowQuery .= $this->query->getMethod() . " ";
 
         return $this;
     }
 
-    public function getFields(): static
+    public function setTable(): static
     {
-        $this->rowQuery .= implode(', ', $this->query->getFields()) . " ";
+        $this->rowQuery .= TableAliases::FROM->name . $this->query->getTable() . " ";
 
         return $this;
     }
 
-    public function getTable(): static
+    public function setFields(): static
     {
-        $this->rowQuery .= TableAliases::FROM->name . " " . $this->query->getTable() . " ";
-
         return $this;
     }
 
-    public function getQuery(): string
+    public function setValues(): static
+    {
+        return $this;
+    }
+
+    public function getRawQuery(): string
     {
         return $this->rowQuery;
     }

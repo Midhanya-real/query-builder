@@ -13,14 +13,14 @@ class DeleteMethod extends AbstractMethod
     {
     }
 
-    protected final function getFiller(Query $query): DeleteQueryFiller
+    protected final function createFiller(Query $query): DeleteQueryFiller
     {
         return new DeleteQueryFiller($query);
     }
 
-    public function getFillingQuery(): Query
+    public function getQuery(): Query
     {
-        $query = $this->getFiller($this->getQuery());
+        $query = $this->createFiller($this->createQuery());
 
         return $query->getQuery($this->table);
     }

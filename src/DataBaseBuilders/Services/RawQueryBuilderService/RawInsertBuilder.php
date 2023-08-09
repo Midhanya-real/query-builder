@@ -1,11 +1,11 @@
 <?php
 
-namespace App\DataBaseBuilders\Services\QueryBuilderService;
+namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
 use App\DataBaseBuilders\DataBases\Enums\TableAliases;
 use App\DataBaseBuilders\DataBases\Model\Query;
 
-class InsertBuilder
+class RawInsertBuilder implements RawBuilderInterface
 {
     private string $rowQuery = '';
 
@@ -15,28 +15,28 @@ class InsertBuilder
     {
     }
 
-    public function getMethod(): static
+    public function setMethod(): static
     {
         $this->rowQuery .= $this->query->getMethod() . " " . TableAliases::INTO->name . " ";
 
         return $this;
     }
 
-    public function getTable(): static
+    public function setTable(): static
     {
         $this->rowQuery .= $this->query->getTable() . " ";
 
         return $this;
     }
 
-    public function getFields(): static
+    public function setFields(): static
     {
         $this->rowQuery .= "(" . implode(', ', array_keys($this->query->getFields()['fields'])) . ")" . " ";
 
         return $this;
     }
 
-    public function getValues(): static
+    public function setValues(): static
     {
         $this->rowQuery .= TableAliases::VALUES->name
             . "(" . implode(', ', $this->query->getFields()['fields']) . ")" . " ";
@@ -44,7 +44,7 @@ class InsertBuilder
         return $this;
     }
 
-    public function getQuery(): string
+    public function getRawQuery(): string
     {
         return $this->rowQuery;
     }

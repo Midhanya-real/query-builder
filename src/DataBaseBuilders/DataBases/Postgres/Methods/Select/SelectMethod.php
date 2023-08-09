@@ -14,14 +14,14 @@ class SelectMethod extends AbstractMethod
     {
     }
 
-    protected final function getFiller(Query $query): SelectQueryFiller
+    protected final function createFiller(Query $query): SelectQueryFiller
     {
         return new SelectQueryFiller($query);
     }
 
-    public function getFillingQuery(): Query
+    public function getQuery(): Query
     {
-        $query = $this->getFiller($this->getQuery());
+        $query = $this->createFiller($this->createQuery());
 
         return $query->getQuery($this->table, $this->fields);
     }

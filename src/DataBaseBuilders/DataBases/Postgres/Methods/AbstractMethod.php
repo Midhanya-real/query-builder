@@ -6,12 +6,12 @@ use App\DataBaseBuilders\DataBases\Model\Query;
 
 abstract class AbstractMethod
 {
-    protected function getQuery(): Query
+    protected function createQuery(): Query
     {
         return new Query();
     }
 
-    abstract protected function getFiller(Query $query): AbstractQueryFiller;
+    abstract protected function createFiller(Query $query): AbstractQueryFiller;
 
-    abstract public function getFillingQuery(): Query;
+    abstract public function getQuery(): Query;
 }

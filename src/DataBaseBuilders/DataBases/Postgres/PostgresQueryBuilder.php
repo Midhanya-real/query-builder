@@ -2,60 +2,60 @@
 
 namespace App\DataBaseBuilders\DataBases\Postgres;
 
+use App\DataBaseBuilders\DataBases\Model\Query;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Delete\DeleteMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Insert\InsertMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Select\SelectMethod;
-use App\DataBaseBuilders\Services\QueryBuilderService\DeleteBuilder;
-use App\DataBaseBuilders\Services\QueryBuilderService\InsertBuilder;
-use App\DataBaseBuilders\Services\QueryBuilderService\SelectBuilder;
+use App\DataBaseBuilders\Services\RawQueryBuilderService\RawDeleteBuilder;
+use App\DataBaseBuilders\Services\RawQueryBuilderService\RawInsertBuilder;
+use App\DataBaseBuilders\Services\RawQueryBuilderService\RawSelectBuilder;
 
-class PostgresQueryBuilder
+class PostgresQueryBuilder extends AbstractPostgresBuilder
 {
     public function select(string $table, array $fields): static
     {
-        $select = new SelectMethod($table, $fields);
-        $query = $select->getFillingQuery();
-        $selectBuilder = new SelectBuilder($query);
-
-        $rowQuery = $selectBuilder->getMethod()
-            ->getFields()
-            ->getTable()
+        $select = $this->createMethod(SelectMethod::class, $table, $fields)
             ->getQuery();
 
-        $query->setRowQuery($rowQuery);
+        $rowQuery = $this->createRawBuilder(RawSelectBuilder::class, $select)
+            ->setMethod()
+            ->setFields()
+            ->setTable()
+            ->getRawQuery();
+
+        $select->setRowQuery($rowQuery);
 
         return $this;
     }
 
     public function insert(string $table, array $fields): static
     {
-        $insert = new InsertMethod($table, $fields);
-        $query = $insert->getFillingQuery();
-        $insertBuilder = new InsertBuilder($query);
-
-        $rowQuery = $insertBuilder->getMethod()
-            ->getTable()
-            ->getFields()
-            ->getValues()
+        $insert = $this->createMethod(InsertMethod::class, $table, $fields)
             ->getQuery();
 
-        $query->setRowQuery($rowQuery);
+        $rowQuery = $this->createRawBuilder(RawInsertBuilder::class, $insert)
+            ->setMethod()
+            ->setTable()
+            ->setFields()
+            ->setValues()
+            ->getRawQuery();
+
+        $insert->setRowQuery($rowQuery);
 
         return $this;
     }
 
     public function delete(string $table): static
     {
-        $delete = new DeleteMethod($table);
-        $query = $delete->getFillingQuery();
-
-        $deleteBuilder = new DeleteBuilder($query);
-
-        $rowQuery = $deleteBuilder->getMethod()
-            ->getTable()
+        $delete = $this->createMethod(DeleteMethod::class, $table)
             ->getQuery();
 
-        $query->setRowQuery($rowQuery);
+        $rowQuery = $this->createRawBuilder(RawDeleteBuilder::class, $delete)
+            ->setMethod()
+            ->setTable()
+            ->getRawQuery();
+
+        $delete->setRowQuery($rowQuery);
 
         return $this;
     }
