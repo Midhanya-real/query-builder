@@ -3,8 +3,9 @@
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods\Delete;
 
 use App\DataBaseBuilders\DataBases\Model\Query;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\AbstractMethod;
 
-class DeleteMethod
+class DeleteMethod extends AbstractMethod
 {
     public function __construct(
         private readonly string $table,
@@ -12,17 +13,12 @@ class DeleteMethod
     {
     }
 
-    private function getQuery(): Query
-    {
-        return new Query();
-    }
-
-    private function getFiller(Query $query): DeleteQueryFiller
+    protected final function getFiller(Query $query): DeleteQueryFiller
     {
         return new DeleteQueryFiller($query);
     }
 
-    public function getDeleteQuery(): Query
+    public function getFillingQuery(): Query
     {
         $query = $this->getFiller($this->getQuery());
 

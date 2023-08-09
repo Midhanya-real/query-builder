@@ -3,8 +3,9 @@
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods\Select;
 
 use App\DataBaseBuilders\DataBases\Model\Query;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\AbstractMethod;
 
-class SelectMethod
+class SelectMethod extends AbstractMethod
 {
     public function __construct(
         private readonly string $table,
@@ -13,17 +14,12 @@ class SelectMethod
     {
     }
 
-    private function getQuery(): Query
-    {
-        return new Query();
-    }
-
-    private function getFiller(Query $query): SelectQueryFiller
+    protected final function getFiller(Query $query): SelectQueryFiller
     {
         return new SelectQueryFiller($query);
     }
 
-    public function getSelectQuery(): Query
+    public function getFillingQuery(): Query
     {
         $query = $this->getFiller($this->getQuery());
 

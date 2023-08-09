@@ -4,9 +4,10 @@ namespace App\DataBaseBuilders\DataBases\Postgres\Methods\Select;
 
 use App\DataBaseBuilders\DataBases\Enums\CRUDMethods;
 use App\DataBaseBuilders\DataBases\Model\Query;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\AbstractQueryFiller;
 use App\DataBaseBuilders\Services\BodyConverterService\SelectBodyConverter;
 
-class SelectQueryFiller
+class SelectQueryFiller extends AbstractQueryFiller
 {
     public function __construct(
         private readonly Query $query,
@@ -15,7 +16,7 @@ class SelectQueryFiller
 
     }
 
-    private function setQuery(string $table, array $fields): Query
+    protected final function setQuery(string $table, ?array $fields): Query
     {
         return $this->query
             ->setMethod(CRUDMethods::SELECT->name)
@@ -23,7 +24,7 @@ class SelectQueryFiller
             ->setFields($fields);
     }
 
-    public function getQuery(string $table, array $fields): Query
+    public function getQuery(string $table, ?array $fields): Query
     {
         $fields = SelectBodyConverter::convert($fields);
 

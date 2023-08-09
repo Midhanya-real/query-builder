@@ -14,7 +14,7 @@ class PostgresQueryBuilder
     public function select(string $table, array $fields): static
     {
         $select = new SelectMethod($table, $fields);
-        $query = $select->getSelectQuery();
+        $query = $select->getFillingQuery();
         $selectBuilder = new SelectBuilder($query);
 
         $rowQuery = $selectBuilder->getMethod()
@@ -30,7 +30,7 @@ class PostgresQueryBuilder
     public function insert(string $table, array $fields): static
     {
         $insert = new InsertMethod($table, $fields);
-        $query = $insert->getInsertQuery();
+        $query = $insert->getFillingQuery();
         $insertBuilder = new InsertBuilder($query);
 
         $rowQuery = $insertBuilder->getMethod()
@@ -47,7 +47,7 @@ class PostgresQueryBuilder
     public function delete(string $table): static
     {
         $delete = new DeleteMethod($table);
-        $query = $delete->getDeleteQuery();
+        $query = $delete->getFillingQuery();
 
         $deleteBuilder = new DeleteBuilder($query);
 
