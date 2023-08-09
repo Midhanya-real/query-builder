@@ -2,7 +2,9 @@
 
 namespace App\DataBaseBuilders\DataBases\Postgres;
 
+use App\DataBaseBuilders\DataBases\Postgres\Methods\Insert\InsertMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Select\SelectMethod;
+use App\DataBaseBuilders\Services\QueryBuilderService\InsertBuilder;
 use App\DataBaseBuilders\Services\QueryBuilderService\SelectBuilder;
 
 class PostgresQueryBuilder
@@ -23,5 +25,20 @@ class PostgresQueryBuilder
         return $this;
     }
 
+    public function insert(string $table, array $fields): static
+    {
+        $insert = new InsertMethod($table, $fields);
+        $query = $insert->getSelectQuery();
+        $insertBuilder = new InsertBuilder($query);
 
+        $rowQuery = $insertBuilder->getMethod()
+            ->getTable()
+            ->getFields()
+            ->getValues()
+            ->getQuery();
+
+        $query->setRowQuery($rowQuery);
+
+        return $this;
+    }
 }

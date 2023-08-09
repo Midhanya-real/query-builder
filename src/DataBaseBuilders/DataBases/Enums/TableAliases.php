@@ -6,4 +6,5 @@ enum TableAliases
 {
     case FROM;
     case INTO;
+    case VALUES;
 }

@@ -6,7 +6,7 @@ use App\DataBaseBuilders\DataBases\Enums\CRUDMethods;
 use App\DataBaseBuilders\DataBases\Model\Query;
 use App\DataBaseBuilders\Services\BodyConverterService\SelectBodyConverter;
 
-class QueryFiller
+class SelectQueryFiller
 {
     public function __construct(
         private readonly Query $query,
