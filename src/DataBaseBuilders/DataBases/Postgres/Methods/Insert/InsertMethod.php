@@ -23,7 +23,7 @@ class InsertMethod
         return new InsertQueryFiller($query);
     }
 
-    public function getSelectQuery(): Query
+    public function getInsertQuery(): Query
     {
         $query = $this->getFiller($this->getQuery());
 
