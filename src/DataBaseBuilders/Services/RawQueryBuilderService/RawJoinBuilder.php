@@ -2,12 +2,12 @@
 
 namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
-use App\DataBaseBuilders\DataBases\Enums\LogicalOperators;
+use App\DataBaseBuilders\DataBases\Enums\TableAliases;
 use App\DataBaseBuilders\DataBases\Model\Query;
 
-class RawWhereBuilder implements RawBuilderInterface
+class RawJoinBuilder implements RawBuilderInterface
 {
-    private string $rawQuery = '';
+    private string $rowQuery = '';
 
     public function __construct(
         private readonly Query $query,
@@ -17,30 +17,26 @@ class RawWhereBuilder implements RawBuilderInterface
 
     public function setMethod(): static
     {
-        $this->rawQuery .= $this->query->getMethod() . " ";
+        $this->rowQuery .= $this->query->getMethod() . " ";
     }
 
     public function setTable(): static
     {
-        return $this;
+        $this->rowQuery .= $this->query->getTable() . " ";
     }
 
     public function setFields(): static
     {
-        return $this;
+        $this->rowQuery .= TableAliases::ON->value . implode(', ', $this->query->getFields());
     }
 
     public function setValues(): static
     {
-        $and = LogicalOperators::AND->value;
-
-        $this->rawQuery .= implode(" {$and} ", $this->query->getValues()) . " ";
-
         return $this;
     }
 
     public function getRawQuery(): string
     {
-        return $this->rawQuery;
+        return $this->rowQuery;
     }
 }

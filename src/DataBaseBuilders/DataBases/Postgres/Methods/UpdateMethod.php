@@ -8,13 +8,6 @@ use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\UpdateQueryFill
 
 final class UpdateMethod extends AbstractMethod
 {
-    public function __construct(
-        private readonly string $table,
-        private readonly array  $fields,
-    )
-    {
-    }
-
     protected function createFiller(Query $query): AbstractQueryFiller
     {
         return new UpdateQueryFiller($query);

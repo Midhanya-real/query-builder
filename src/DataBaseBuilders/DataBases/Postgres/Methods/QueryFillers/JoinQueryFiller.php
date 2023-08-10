@@ -2,16 +2,16 @@
 
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
-use App\DataBaseBuilders\DataBases\Enums\CRUDOperators;
+use App\DataBaseBuilders\DataBases\Enums\TableAliases;
 use App\DataBaseBuilders\DataBases\Model\Query;
-use App\DataBaseBuilders\Services\BodyConverterService\InsertBodyConverter;
+use App\DataBaseBuilders\Services\BodyConverterService\UpdateBodyConverter;
 
-class InsertQueryFiller extends AbstractQueryFiller
+class JoinQueryFiller extends AbstractQueryFiller
 {
-    protected final function setQuery(?string $table, ?array $fields): Query
+    protected function setQuery(?string $table, ?array $fields): Query
     {
         return $this->query
-            ->setMethod(CRUDOperators::INSERT->value)
+            ->setMethod(TableAliases::JOIN->value)
             ->setTable($table)
             ->setFields($fields['fields'])
             ->setValues($fields['values']);
@@ -19,7 +19,7 @@ class InsertQueryFiller extends AbstractQueryFiller
 
     public function getQuery(?string $table, ?array $fields): Query
     {
-        $fields = InsertBodyConverter::convert($fields);
+        $fields = UpdateBodyConverter::convert($fields);
 
         return $this->setQuery($table, $fields);
     }

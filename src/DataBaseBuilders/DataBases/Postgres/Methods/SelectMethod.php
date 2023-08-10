@@ -7,13 +7,6 @@ use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\SelectQueryFill
 
 final class SelectMethod extends AbstractMethod
 {
-    public function __construct(
-        private readonly string $table,
-        private readonly array  $fields,
-    )
-    {
-    }
-
     protected function createFiller(Query $query): SelectQueryFiller
     {
         return new SelectQueryFiller($query);

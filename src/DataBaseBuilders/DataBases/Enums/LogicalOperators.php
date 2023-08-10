@@ -2,9 +2,9 @@
 
 namespace App\DataBaseBuilders\DataBases\Enums;
 
-enum LogicalOperators
+enum LogicalOperators: string
 {
-    case AND;
-    case OR;
-    case NOT;
+    case AND = 'AND';
+    case OR = 'OR';
+    case NOT = 'NOT';
 }

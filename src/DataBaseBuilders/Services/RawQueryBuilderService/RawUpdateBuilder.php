@@ -31,7 +31,7 @@ class RawUpdateBuilder implements RawBuilderInterface
 
     public function setFields(): static
     {
-        $this->rowQuery .= TableAliases::SET->name . implode(', ', $this->query->getFields());
+        $this->rowQuery .= TableAliases::SET->value . implode(', ', $this->query->getFields());
 
         return $this;
     }

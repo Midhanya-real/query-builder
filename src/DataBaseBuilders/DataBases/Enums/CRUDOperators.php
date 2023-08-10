@@ -2,10 +2,10 @@
 
 namespace App\DataBaseBuilders\DataBases\Enums;
 
-enum CRUDOperators
+enum CRUDOperators: string
 {
-    case SELECT;
-    case INSERT;
-    case UPDATE;
-    case DELETE;
+    case SELECT = 'SELECT';
+    case INSERT = 'INSERT';
+    case UPDATE = 'UPDATE';
+    case DELETE = 'DELETE';
 }

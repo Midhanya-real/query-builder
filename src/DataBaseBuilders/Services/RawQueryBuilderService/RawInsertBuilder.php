@@ -31,15 +31,15 @@ class RawInsertBuilder implements RawBuilderInterface
 
     public function setFields(): static
     {
-        $this->rowQuery .= "(" . implode(', ', array_keys($this->query->getFields()['fields'])) . ")" . " ";
+        $this->rowQuery .= "(" . implode(', ', array_keys($this->query->getFields())) . ")" . " ";
 
         return $this;
     }
 
     public function setValues(): static
     {
-        $this->rowQuery .= TableAliases::VALUES->name
-            . "(" . implode(', ', $this->query->getFields()['fields']) . ")" . " ";
+        $this->rowQuery .= TableAliases::VALUES->value
+            . "(" . implode(', ', $this->query->getFields()) . ")" . " ";
 
         return $this;
     }

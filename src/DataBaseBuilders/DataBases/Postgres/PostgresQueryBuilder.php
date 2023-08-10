@@ -5,11 +5,15 @@ namespace App\DataBaseBuilders\DataBases\Postgres;
 use App\DataBaseBuilders\DataBases\Model\Query;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\DeleteMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\InsertMethod;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\JoinMethod;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\OutJoinMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\SelectMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\UpdateMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\WhereMethod;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawDeleteBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawInsertBuilder;
+use App\DataBaseBuilders\Services\RawQueryBuilderService\RawJoinBuilder;
+use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOutJoinBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawSelectBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawUpdateBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawWhereBuilder;
@@ -93,5 +97,37 @@ class PostgresQueryBuilder extends Builder
         $where->setRawQuery($rawQuery);
 
         return $where;
+    }
+
+    public function join(string $table, array $keys): Query
+    {
+        $join = $this->createMethod(JoinMethod::class, $table, $keys)
+            ->getQuery();
+
+        $rawQuery = $this->createRawBuilder(RawJoinBuilder::class, $join)
+            ->setMethod()
+            ->setTable()
+            ->setFields()
+            ->getRawQuery();
+
+        $join->setRawQuery($rawQuery);
+
+        return $join;
+    }
+
+    public function outJoin(string $table, array $keys): Query
+    {
+        $join = $this->createMethod(OutJoinMethod::class, $table, $keys)
+            ->getQuery();
+
+        $rawQuery = $this->createRawBuilder(RawOutJoinBuilder::class, $join)
+            ->setMethod()
+            ->setTable()
+            ->setFields()
+            ->getRawQuery();
+
+        $join->setRawQuery($rawQuery);
+
+        return $join;
     }
 }

@@ -8,16 +8,10 @@ use App\DataBaseBuilders\Services\BodyConverterService\UpdateBodyConverter;
 
 class UpdateQueryFiller extends AbstractQueryFiller
 {
-    public function __construct(
-        private readonly Query $query
-    )
-    {
-    }
-
     protected function setQuery(?string $table, ?array $fields): Query
     {
         return $this->query
-            ->setMethod(CRUDOperators::UPDATE->name)
+            ->setMethod(CRUDOperators::UPDATE->value)
             ->setTable($table)
             ->setFields($fields['fields'])
             ->setValues($fields['values']);

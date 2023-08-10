@@ -7,10 +7,9 @@ use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\DeleteQueryFill
 
 final class DeleteMethod extends AbstractMethod
 {
-    public function __construct(
-        private readonly string $table,
-    )
+    public function __construct(string $table, array $fields)
     {
+        parent::__construct($table, $fields);
     }
 
     protected function createFiller(Query $query): DeleteQueryFiller

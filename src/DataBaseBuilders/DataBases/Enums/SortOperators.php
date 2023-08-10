@@ -2,8 +2,8 @@
 
 namespace App\DataBaseBuilders\DataBases\Enums;
 
-enum SortOperators
+enum SortOperators: string
 {
-    case WHERE;
-    case ORDER_BY;
+    case WHERE = 'WHERE';
+    case ORDER_BY = 'ORDER BY';
 }
