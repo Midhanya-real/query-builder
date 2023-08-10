@@ -19,7 +19,10 @@ abstract class AbstractMethod
         return new Query();
     }
 
-    abstract protected function createFiller(Query $query): AbstractQueryFiller;
+    protected function createFiller(string $filler, Query $query): AbstractQueryFiller
+    {
+        return new $filler($query);
+    }
 
     abstract public function getQuery(): Query;
 }

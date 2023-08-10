@@ -5,16 +5,11 @@ namespace App\DataBaseBuilders\DataBases\Postgres\Methods;
 use App\DataBaseBuilders\DataBases\Model\Query;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\InsertQueryFiller;
 
-final class InsertMethod extends AbstractMethod
+final class Insert extends AbstractMethod
 {
-    protected function createFiller(Query $query): InsertQueryFiller
-    {
-        return new InsertQueryFiller($query);
-    }
-
     public function getQuery(): Query
     {
-        $query = $this->createFiller($this->createQuery());
+        $query = $this->createFiller(InsertQueryFiller::class, $this->createQuery());
 
         return $query->getQuery($this->table, $this->fields);
     }
