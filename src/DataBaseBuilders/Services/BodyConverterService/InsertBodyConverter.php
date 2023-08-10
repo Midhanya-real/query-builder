@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\Services\BodyConverterService;
 
-class InsertBodyConverter
+class InsertBodyConverter implements BodyConverterInterface
 {
     public static function convert(array $fields): array
     {

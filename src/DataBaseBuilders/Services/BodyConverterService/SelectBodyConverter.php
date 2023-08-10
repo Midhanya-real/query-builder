@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\Services\BodyConverterService;
 
-class SelectBodyConverter
+class SelectBodyConverter implements BodyConverterInterface
 {
     private static function isAlias(int|string $key): bool
     {
