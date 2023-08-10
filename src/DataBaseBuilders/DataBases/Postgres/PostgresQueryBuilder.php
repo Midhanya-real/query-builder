@@ -4,6 +4,7 @@ namespace App\DataBaseBuilders\DataBases\Postgres;
 
 use App\DataBaseBuilders\DataBases\Model\Query;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\DeleteMethod;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\GroupByMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\InsertMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\JoinMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\LimitMethod;
@@ -13,6 +14,7 @@ use App\DataBaseBuilders\DataBases\Postgres\Methods\SelectMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\UpdateMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\WhereMethod;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawDeleteBuilder;
+use App\DataBaseBuilders\Services\RawQueryBuilderService\RawGroupByBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawInsertBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawJoinBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawLimitBuilder;
@@ -137,31 +139,56 @@ class PostgresQueryBuilder extends Builder
 
     public function limit(string $limit): Query
     {
-        $limit = $this->createMethod(LimitMethod::class, null, [$limit])
+        $limits = $this->createMethod(LimitMethod::class, null, [$limit])
             ->getQuery();
 
-        $rawQuery = $this->createRawBuilder(RawLimitBuilder::class, $limit)
+        $rawQuery = $this->createRawBuilder(RawLimitBuilder::class, $limits)
             ->setMethod()
             ->setValues()
             ->getRawQuery();
 
-        $limit->setRawQuery($rawQuery);
+        $limits->setRawQuery($rawQuery);
 
-        return $limit;
+        return $limits;
     }
 
     public function offset(string $limit): Query
     {
-        $limit = $this->createMethod(OffsetMethod::class, null, [$limit])
+        $offset = $this->createMethod(OffsetMethod::class, null, [$limit])
             ->getQuery();
 
-        $rawQuery = $this->createRawBuilder(RawOffsetBuilder::class, $limit)
+        $rawQuery = $this->createRawBuilder(RawOffsetBuilder::class, $offset)
             ->setMethod()
             ->setValues()
             ->getRawQuery();
 
-        $limit->setRawQuery($rawQuery);
+        $offset->setRawQuery($rawQuery);
 
-        return $limit;
+        return $offset;
+    }
+
+    public function groupBy(array $groupColumns): Query
+    {
+        $groupBy = $this->createMethod(GroupByMethod::class, null, $groupColumns)
+            ->getQuery();
+
+        $rawQuery = $this->createRawBuilder(RawGroupByBuilder::class, $groupBy)
+            ->setMethod()
+            ->setFields()
+            ->getRawQuery();
+
+        $groupBy->setRawQuery($rawQuery);
+
+        return $groupBy;
+    }
+
+    public function orderBy(array $orderFields): Query
+    {
+
+    }
+
+    public function having(string $agrFunc, string $sign, string $value): Query
+    {
+
     }
 }
