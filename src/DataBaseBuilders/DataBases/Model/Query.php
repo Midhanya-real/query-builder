@@ -12,7 +12,7 @@ class Query
 
     private ?array $values;
 
-    private string $rowQuery;
+    private string $rawQuery;
 
     /**
      * @param string $method
@@ -88,18 +88,18 @@ class Query
     }
 
     /**
-     * @param string $rowQuery
+     * @param string $rawQuery
      */
-    public function setRowQuery(string $rowQuery): void
+    public function setRawQuery(string $rawQuery): void
     {
-        $this->rowQuery = $rowQuery;
+        $this->rawQuery = $rawQuery;
     }
 
     /**
      * @return string
      */
-    public function getRowQuery(): string
+    public function getRawQuery(): string
     {
-        return $this->rowQuery;
+        return $this->rawQuery;
     }
 }

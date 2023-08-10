@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
-use App\DataBaseBuilders\DataBases\Enums\CRUDMethods;
+use App\DataBaseBuilders\DataBases\Enums\CRUDOperators;
 use App\DataBaseBuilders\DataBases\Model\Query;
 use App\DataBaseBuilders\Services\BodyConverterService\SelectBodyConverter;
 
@@ -15,15 +15,15 @@ class SelectQueryFiller extends AbstractQueryFiller
 
     }
 
-    protected final function setQuery(string $table, ?array $fields): Query
+    protected final function setQuery(?string $table, ?array $fields): Query
     {
         return $this->query
-            ->setMethod(CRUDMethods::SELECT->name)
+            ->setMethod(CRUDOperators::SELECT->name)
             ->setTable($table)
             ->setFields($fields);
     }
 
-    public function getQuery(string $table, ?array $fields): Query
+    public function getQuery(?string $table, ?array $fields): Query
     {
         $fields = SelectBodyConverter::convert($fields);
 

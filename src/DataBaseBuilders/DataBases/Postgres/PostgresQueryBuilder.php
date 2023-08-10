@@ -7,10 +7,12 @@ use App\DataBaseBuilders\DataBases\Postgres\Methods\DeleteMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\InsertMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\SelectMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\UpdateMethod;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\WhereMethod;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawDeleteBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawInsertBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawSelectBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawUpdateBuilder;
+use App\DataBaseBuilders\Services\RawQueryBuilderService\RawWhereBuilder;
 
 class PostgresQueryBuilder extends Builder
 {
@@ -25,7 +27,7 @@ class PostgresQueryBuilder extends Builder
             ->setTable()
             ->getRawQuery();
 
-        $select->setRowQuery($rowQuery);
+        $select->setRawQuery($rowQuery);
 
         return $select;
     }
@@ -42,7 +44,7 @@ class PostgresQueryBuilder extends Builder
             ->setValues()
             ->getRawQuery();
 
-        $insert->setRowQuery($rowQuery);
+        $insert->setRawQuery($rowQuery);
 
         return $insert;
     }
@@ -57,7 +59,7 @@ class PostgresQueryBuilder extends Builder
             ->setTable()
             ->getRawQuery();
 
-        $delete->setRowQuery($rowQuery);
+        $delete->setRawQuery($rowQuery);
 
         return $delete;
     }
@@ -73,13 +75,23 @@ class PostgresQueryBuilder extends Builder
             ->setFields()
             ->getRawQuery();
 
-        $update->setRowQuery($rowQuery);
+        $update->setRawQuery($rowQuery);
 
         return $update;
     }
 
-    public function where(array $values)
+    public function where(array $values): Query
     {
+        $where = $this->createMethod(WhereMethod::class, null, $values)
+            ->getQuery();
 
+        $rawQuery = $this->createRawBuilder(RawWhereBuilder::class, $where)
+            ->setMethod()
+            ->setValues()
+            ->getRawQuery();
+
+        $where->setRawQuery($rawQuery);
+
+        return $where;
     }
 }

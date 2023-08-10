@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\DataBases\Enums;
 
-enum CRUDMethods
+enum CRUDOperators
 {
     case SELECT;
     case INSERT;
