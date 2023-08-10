@@ -1,11 +1,11 @@
 <?php
 
-namespace App\DataBaseBuilders\DataBases\Postgres\Methods\Insert;
+namespace App\DataBaseBuilders\DataBases\Postgres\Methods;
 
 use App\DataBaseBuilders\DataBases\Model\Query;
-use App\DataBaseBuilders\DataBases\Postgres\Methods\AbstractMethod;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\InsertQueryFiller;
 
-class InsertMethod extends AbstractMethod
+final class InsertMethod extends AbstractMethod
 {
     public function __construct(
         private readonly string $table,
@@ -14,7 +14,7 @@ class InsertMethod extends AbstractMethod
     {
     }
 
-    protected final function createFiller(Query $query): InsertQueryFiller
+    protected function createFiller(Query $query): InsertQueryFiller
     {
         return new InsertQueryFiller($query);
     }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\DataBaseBuilders\DataBases\Postgres\Methods\Delete;
+namespace App\DataBaseBuilders\DataBases\Postgres\Methods;
 
 use App\DataBaseBuilders\DataBases\Model\Query;
-use App\DataBaseBuilders\DataBases\Postgres\Methods\AbstractMethod;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\DeleteQueryFiller;
 
-class DeleteMethod extends AbstractMethod
+final class DeleteMethod extends AbstractMethod
 {
     public function __construct(
         private readonly string $table,
@@ -13,7 +13,7 @@ class DeleteMethod extends AbstractMethod
     {
     }
 
-    protected final function createFiller(Query $query): DeleteQueryFiller
+    protected function createFiller(Query $query): DeleteQueryFiller
     {
         return new DeleteQueryFiller($query);
     }

@@ -1,13 +1,12 @@
 <?php
 
-namespace App\DataBaseBuilders\DataBases\Postgres\Methods\Select;
+namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
 use App\DataBaseBuilders\DataBases\Enums\CRUDMethods;
 use App\DataBaseBuilders\DataBases\Model\Query;
-use App\DataBaseBuilders\DataBases\Postgres\Methods\AbstractQueryFiller;
-use App\DataBaseBuilders\Services\BodyConverterService\SelectBodyConverter;
+use App\DataBaseBuilders\Services\BodyConverterService\InsertBodyConverter;
 
-class SelectQueryFiller extends AbstractQueryFiller
+class InsertQueryFiller extends AbstractQueryFiller
 {
     public function __construct(
         private readonly Query $query,
@@ -19,16 +18,16 @@ class SelectQueryFiller extends AbstractQueryFiller
     protected final function setQuery(string $table, ?array $fields): Query
     {
         return $this->query
-            ->setMethod(CRUDMethods::SELECT->name)
+            ->setMethod(CRUDMethods::INSERT->name)
             ->setTable($table)
-            ->setFields($fields);
+            ->setFields($fields['fields'])
+            ->setValues($fields['values']);
     }
 
     public function getQuery(string $table, ?array $fields): Query
     {
-        $fields = SelectBodyConverter::convert($fields);
+        $fields = InsertBodyConverter::convert($fields);
 
         return $this->setQuery($table, $fields);
     }
-
 }

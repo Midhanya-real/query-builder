@@ -1,11 +1,11 @@
 <?php
 
-namespace App\DataBaseBuilders\DataBases\Postgres\Methods\Select;
+namespace App\DataBaseBuilders\DataBases\Postgres\Methods;
 
 use App\DataBaseBuilders\DataBases\Model\Query;
-use App\DataBaseBuilders\DataBases\Postgres\Methods\AbstractMethod;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\SelectQueryFiller;
 
-class SelectMethod extends AbstractMethod
+final class SelectMethod extends AbstractMethod
 {
     public function __construct(
         private readonly string $table,
@@ -14,7 +14,7 @@ class SelectMethod extends AbstractMethod
     {
     }
 
-    protected final function createFiller(Query $query): SelectQueryFiller
+    protected function createFiller(Query $query): SelectQueryFiller
     {
         return new SelectQueryFiller($query);
     }

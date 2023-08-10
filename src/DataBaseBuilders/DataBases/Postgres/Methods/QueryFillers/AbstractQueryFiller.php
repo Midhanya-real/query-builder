@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataBaseBuilders\DataBases\Postgres\Methods;
+namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
 use App\DataBaseBuilders\DataBases\Model\Query;
 

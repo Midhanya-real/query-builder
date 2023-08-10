@@ -1,10 +1,9 @@
 <?php
 
-namespace App\DataBaseBuilders\DataBases\Postgres\Methods\Delete;
+namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
 use App\DataBaseBuilders\DataBases\Enums\CRUDMethods;
 use App\DataBaseBuilders\DataBases\Model\Query;
-use App\DataBaseBuilders\DataBases\Postgres\Methods\AbstractQueryFiller;
 
 class DeleteQueryFiller extends AbstractQueryFiller
 {

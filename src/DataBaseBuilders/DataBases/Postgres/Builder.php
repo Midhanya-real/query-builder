@@ -6,7 +6,7 @@ use App\DataBaseBuilders\DataBases\Model\Query;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\AbstractMethod;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawBuilderInterface;
 
-abstract class AbstractPostgresBuilder
+class Builder
 {
     protected function createMethod(string $method, string $table, ?array $fields = null): AbstractMethod
     {
