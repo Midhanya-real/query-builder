@@ -7,6 +7,7 @@ use App\DataBaseBuilders\DataBases\Postgres\Methods\DeleteMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\InsertMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\JoinMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\LimitMethod;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\OffsetMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\OutJoinMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\SelectMethod;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\UpdateMethod;
@@ -15,6 +16,7 @@ use App\DataBaseBuilders\Services\RawQueryBuilderService\RawDeleteBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawInsertBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawJoinBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawLimitBuilder;
+use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOffsetBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOutJoinBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawSelectBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawUpdateBuilder;
@@ -139,6 +141,21 @@ class PostgresQueryBuilder extends Builder
             ->getQuery();
 
         $rawQuery = $this->createRawBuilder(RawLimitBuilder::class, $limit)
+            ->setMethod()
+            ->setValues()
+            ->getRawQuery();
+
+        $limit->setRawQuery($rawQuery);
+
+        return $limit;
+    }
+
+    public function offset(string $limit): Query
+    {
+        $limit = $this->createMethod(OffsetMethod::class, null, [$limit])
+            ->getQuery();
+
+        $rawQuery = $this->createRawBuilder(RawOffsetBuilder::class, $limit)
             ->setMethod()
             ->setValues()
             ->getRawQuery();

@@ -4,7 +4,7 @@ namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
 use App\DataBaseBuilders\DataBases\Model\Query;
 
-class RawLimitBuilder implements RawBuilderInterface
+class RawOffsetBuilder implements RawBuilderInterface
 {
     private string $rowQuery = '';
 
