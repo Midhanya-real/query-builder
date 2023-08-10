@@ -8,8 +8,8 @@ use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\AbstractQueryFi
 abstract class AbstractMethod
 {
     public function __construct(
-        protected readonly ?string $table = null,
-        protected readonly ?array  $fields = null,
+        protected readonly null|string $table = null,
+        protected readonly null|array  $fields = null,
     )
     {
     }
