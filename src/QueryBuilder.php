@@ -2,12 +2,12 @@
 
 namespace App;
 
-use App\DbConnection\DbConnection;
+use App\Connection\Connection;
 
 class QueryBuilder
 {
-    public function getDataBase(): DbConnection
+    public function getDataBase(): Connection
     {
-        return DbConnection::getInstance();
+        return Connection::getInstance();
     }
 }
