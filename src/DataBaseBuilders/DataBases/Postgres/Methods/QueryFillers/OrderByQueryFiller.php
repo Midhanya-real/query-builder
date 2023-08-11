@@ -2,8 +2,8 @@
 
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
-use App\DataBaseBuilders\DataBases\Enums\SortOperators;
-use App\DataBaseBuilders\DataBases\Model\Query;
+use App\DataBaseBuilders\Enums\SortOperators;
+use App\DataBaseBuilders\Model\Query;
 use App\DataBaseBuilders\Services\BodyConverterService\OrderBodyConverter;
 
 class OrderByQueryFiller extends AbstractQueryFiller
@@ -13,8 +13,7 @@ class OrderByQueryFiller extends AbstractQueryFiller
     {
         return $this->query
             ->setMethod(SortOperators::ORDER_BY->value)
-            ->setFields($fields['fields'])
-            ->setValues($fields['values']);
+            ->setFields($fields['fields']);
     }
 
     public function getQuery(?string $table, ?array $fields): Query

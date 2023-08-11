@@ -2,8 +2,8 @@
 
 namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
-use App\DataBaseBuilders\DataBases\Enums\LogicalOperators;
-use App\DataBaseBuilders\DataBases\Model\Query;
+use App\DataBaseBuilders\Enums\LogicalOperators;
+use App\DataBaseBuilders\Model\Query;
 
 class RawWhereBuilder implements RawBuilderInterface
 {
@@ -18,6 +18,8 @@ class RawWhereBuilder implements RawBuilderInterface
     public function setMethod(): static
     {
         $this->rawQuery .= $this->query->getMethod() . " ";
+
+        return $this;
     }
 
     public function setTable(): static
@@ -27,15 +29,15 @@ class RawWhereBuilder implements RawBuilderInterface
 
     public function setFields(): static
     {
+        $and = LogicalOperators::AND->value;
+
+        $this->rawQuery .= implode(" {$and} ", $this->query->getFields()) . " ";
+
         return $this;
     }
 
     public function setValues(): static
     {
-        $and = LogicalOperators::AND->value;
-
-        $this->rawQuery .= implode(" {$and} ", $this->query->getValues()) . " ";
-
         return $this;
     }
 

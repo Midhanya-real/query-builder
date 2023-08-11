@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataBaseBuilders\DataBases\Model;
+namespace App\DataBaseBuilders\Model;
 
 class Query
 {
@@ -8,9 +8,9 @@ class Query
 
     private string $table;
 
-    private array $fields;
+    private array|null $fields = null;
 
-    private ?array $values;
+    private array|null $values = null;
 
     private string $rawQuery;
 
@@ -35,10 +35,13 @@ class Query
 
     /**
      * @param string $table
+     * @return Query
      */
     public function setTable(string $table): static
     {
         $this->table = $table;
+
+        return $this;
     }
 
     /**
@@ -61,9 +64,9 @@ class Query
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function getFields(): array
+    public function getFields(): array|null
     {
         return $this->fields;
     }
@@ -82,7 +85,7 @@ class Query
     /**
      * @return array|null
      */
-    public function getValues(): ?array
+    public function getValues(): array|null
     {
         return $this->values;
     }

@@ -2,8 +2,8 @@
 
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods;
 
-use App\DataBaseBuilders\DataBases\Model\Query;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\WhereQueryFiller;
+use App\DataBaseBuilders\Model\Query;
 
 class Where extends AbstractMethod
 {

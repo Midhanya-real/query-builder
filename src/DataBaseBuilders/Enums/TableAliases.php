@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataBaseBuilders\DataBases\Enums;
+namespace App\DataBaseBuilders\Enums;
 
 enum TableAliases: string
 {

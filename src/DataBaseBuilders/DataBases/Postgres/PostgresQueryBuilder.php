@@ -2,7 +2,6 @@
 
 namespace App\DataBaseBuilders\DataBases\Postgres;
 
-use App\DataBaseBuilders\DataBases\Model\Query;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Delete;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\GroupBy;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Insert;
@@ -14,6 +13,7 @@ use App\DataBaseBuilders\DataBases\Postgres\Methods\OutJoin;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Select;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Update;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Where;
+use App\DataBaseBuilders\Model\Query;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawDeleteBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawGroupByBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawInsertBuilder;
@@ -99,7 +99,7 @@ class PostgresQueryBuilder extends Builder
 
         $rawQuery = $this->createRawBuilder(RawWhereBuilder::class, $where)
             ->setMethod()
-            ->setValues()
+            ->setFields()
             ->getRawQuery();
 
         $where->setRawQuery($rawQuery);

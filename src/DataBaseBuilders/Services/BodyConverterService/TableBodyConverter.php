@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\Services\BodyConverterService;
 
-use App\DataBaseBuilders\DataBases\Enums\TableAliases;
+use App\DataBaseBuilders\Enums\TableAliases;
 
 class TableBodyConverter implements BodyConverterInterface
 {
@@ -17,9 +17,9 @@ class TableBodyConverter implements BodyConverterInterface
 
         foreach ($fields as $key => $value) {
             if (!static::isAlias($key)) {
-                $converted = $value;
-            } else {
                 $converted = $key . " " . TableAliases::AS->value . " " . $value;
+            } else {
+                $converted = $value;
             }
         }
 

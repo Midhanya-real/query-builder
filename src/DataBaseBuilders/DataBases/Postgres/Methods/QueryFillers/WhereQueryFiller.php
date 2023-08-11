@@ -2,8 +2,8 @@
 
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
-use App\DataBaseBuilders\DataBases\Enums\SortOperators;
-use App\DataBaseBuilders\DataBases\Model\Query;
+use App\DataBaseBuilders\Enums\SortOperators;
+use App\DataBaseBuilders\Model\Query;
 use App\DataBaseBuilders\Services\BodyConverterService\UpdateBodyConverter;
 
 class WhereQueryFiller extends AbstractQueryFiller

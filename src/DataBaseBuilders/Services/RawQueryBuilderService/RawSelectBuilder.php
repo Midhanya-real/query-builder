@@ -2,8 +2,8 @@
 
 namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
-use App\DataBaseBuilders\DataBases\Enums\TableAliases;
-use App\DataBaseBuilders\DataBases\Model\Query;
+use App\DataBaseBuilders\Enums\TableAliases;
+use App\DataBaseBuilders\Model\Query;
 
 class RawSelectBuilder implements RawBuilderInterface
 {

@@ -2,8 +2,8 @@
 
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods;
 
-use App\DataBaseBuilders\DataBases\Model\Query;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\OffsetQueryFiller;
+use App\DataBaseBuilders\Model\Query;
 
 class Offset extends AbstractMethod
 {

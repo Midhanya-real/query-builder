@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataBaseBuilders\DataBases\QueryPartsInterfaces;
+namespace App\DataBaseBuilders\QueryPartsInterfaces;
 
 interface CRUDMethodsInterface
 {

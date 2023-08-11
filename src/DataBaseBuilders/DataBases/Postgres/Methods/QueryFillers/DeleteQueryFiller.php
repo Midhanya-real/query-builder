@@ -2,8 +2,8 @@
 
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
-use App\DataBaseBuilders\DataBases\Enums\CRUDOperators;
-use App\DataBaseBuilders\DataBases\Model\Query;
+use App\DataBaseBuilders\Enums\CRUDOperators;
+use App\DataBaseBuilders\Model\Query;
 
 class DeleteQueryFiller extends AbstractQueryFiller
 {
