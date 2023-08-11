@@ -24,7 +24,7 @@ class RawDeleteBuilder implements RawBuilderInterface
 
     public function setTable(): static
     {
-        $this->rowQuery .= TableAliases::FROM->value . $this->query->getTable() . " ";
+        $this->rowQuery .= TableAliases::FROM->value . " " . $this->query->getTable() . " ";
 
         return $this;
     }

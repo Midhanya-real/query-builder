@@ -18,16 +18,22 @@ class RawJoinBuilder implements RawBuilderInterface
     public function setMethod(): static
     {
         $this->rowQuery .= $this->query->getMethod() . " ";
+
+        return $this;
     }
 
     public function setTable(): static
     {
         $this->rowQuery .= $this->query->getTable() . " ";
+
+        return $this;
     }
 
     public function setFields(): static
     {
-        $this->rowQuery .= TableAliases::ON->value . implode(', ', $this->query->getFields());
+        $this->rowQuery .= TableAliases::ON->value . " " . implode(', ', $this->query->getFields());
+
+        return $this;
     }
 
     public function setValues(): static

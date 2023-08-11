@@ -4,25 +4,26 @@ namespace App\DataBaseBuilders\Services\BodyConverterService;
 
 use App\DataBaseBuilders\DataBases\Enums\TableAliases;
 
-class SelectBodyConverter implements BodyConverterInterface
+class TableBodyConverter implements BodyConverterInterface
 {
     private static function isAlias(int|string $key): bool
     {
         return is_int($key);
     }
 
-    public static function convert(array $fields): array
+    public static function convert(array $fields): string
     {
-        $converted = [];
+        $converted = '';
 
         foreach ($fields as $key => $value) {
-            if (!self::isAlias($key)) {
-                $converted[] = $value;
+            if (!static::isAlias($key)) {
+                $converted = $value;
             } else {
-                $converted[] = $key . " " . TableAliases::AS->value . " " . $value;
+                $converted = $key . " " . TableAliases::AS->value . " " . $value;
             }
         }
 
         return $converted;
+
     }
 }

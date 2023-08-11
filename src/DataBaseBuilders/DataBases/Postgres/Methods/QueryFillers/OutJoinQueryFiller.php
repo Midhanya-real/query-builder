@@ -9,7 +9,7 @@ use App\DataBaseBuilders\Services\BodyConverterService\UpdateBodyConverter;
 class OutJoinQueryFiller extends AbstractQueryFiller
 {
 
-    protected function setQuery(?string $table, ?array $fields): Query
+    protected function setQuery(null|string|array $table, null|array $fields): Query
     {
         return $this->query
             ->setMethod(TableAliases::FULL_OUTER_JOIN->value)
@@ -18,8 +18,12 @@ class OutJoinQueryFiller extends AbstractQueryFiller
             ->setValues($fields['values']);
     }
 
-    public function getQuery(?string $table, ?array $fields): Query
+    public function getQuery(null|string|array $table, null|array $fields): Query
     {
+        if (static::isAlias($table)) {
+            $table = static::setAlias($table);
+        }
+
         $fields = UpdateBodyConverter::convert($fields);
 
         return $this->setQuery($table, $fields);

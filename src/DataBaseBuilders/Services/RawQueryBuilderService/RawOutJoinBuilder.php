@@ -4,7 +4,6 @@ namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
 use App\DataBaseBuilders\DataBases\Enums\TableAliases;
 use App\DataBaseBuilders\DataBases\Model\Query;
-use App\DataBaseBuilders\Services\RawQueryBuilderService\RawBuilderInterface;
 
 class RawOutJoinBuilder implements RawBuilderInterface
 {
@@ -19,16 +18,22 @@ class RawOutJoinBuilder implements RawBuilderInterface
     public function setMethod(): static
     {
         $this->rowQuery .= $this->query->getMethod() . " ";
+
+        return $this;
     }
 
     public function setTable(): static
     {
         $this->rowQuery .= $this->query->getTable() . " ";
+
+        return $this;
     }
 
     public function setFields(): static
     {
-        $this->rowQuery .= TableAliases::ON->value . implode(', ', $this->query->getFields());
+        $this->rowQuery .= TableAliases::ON->value . " " . implode(', ', $this->query->getFields());
+
+        return $this;
     }
 
     public function setValues(): static

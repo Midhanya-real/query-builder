@@ -8,7 +8,7 @@ use App\DataBaseBuilders\Services\RawQueryBuilderService\RawBuilderInterface;
 
 class Builder
 {
-    protected function createMethod(string $method, string $table, ?array $fields = null): AbstractMethod
+    protected function createMethod(string $method, string|array $table, ?array $fields = null): AbstractMethod
     {
         return new $method($table, $fields);
     }

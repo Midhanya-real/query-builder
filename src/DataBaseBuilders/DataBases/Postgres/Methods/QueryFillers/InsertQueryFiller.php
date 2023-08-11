@@ -8,7 +8,7 @@ use App\DataBaseBuilders\Services\BodyConverterService\InsertBodyConverter;
 
 class InsertQueryFiller extends AbstractQueryFiller
 {
-    protected final function setQuery(?string $table, ?array $fields): Query
+    protected final function setQuery(null|string|array $table, null|array $fields): Query
     {
         return $this->query
             ->setMethod(CRUDOperators::INSERT->value)
@@ -17,8 +17,12 @@ class InsertQueryFiller extends AbstractQueryFiller
             ->setValues($fields['values']);
     }
 
-    public function getQuery(?string $table, ?array $fields): Query
+    public function getQuery(null|string|array $table, null|array $fields): Query
     {
+        if (static::isAlias($table)) {
+            $table = static::setAlias($table);
+        }
+
         $fields = InsertBodyConverter::convert($fields);
 
         return $this->setQuery($table, $fields);

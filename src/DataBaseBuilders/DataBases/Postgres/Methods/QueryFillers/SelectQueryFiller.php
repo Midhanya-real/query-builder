@@ -8,7 +8,7 @@ use App\DataBaseBuilders\Services\BodyConverterService\SelectBodyConverter;
 
 class SelectQueryFiller extends AbstractQueryFiller
 {
-    protected final function setQuery(?string $table, ?array $fields): Query
+    protected final function setQuery(null|string|array $table, ?array $fields): Query
     {
         return $this->query
             ->setMethod(CRUDOperators::SELECT->value)
@@ -16,8 +16,12 @@ class SelectQueryFiller extends AbstractQueryFiller
             ->setFields($fields);
     }
 
-    public function getQuery(?string $table, ?array $fields): Query
+    public function getQuery(null|string|array $table, null|array $fields): Query
     {
+        if (static::isAlias($table)) {
+            $table = static::setAlias($table);
+        }
+
         $fields = SelectBodyConverter::convert($fields);
 
         return $this->setQuery($table, $fields);

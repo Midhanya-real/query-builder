@@ -28,7 +28,7 @@ use App\DataBaseBuilders\Services\RawQueryBuilderService\RawWhereBuilder;
 
 class PostgresQueryBuilder extends Builder
 {
-    public function select(string $table, array $fields): Query
+    public function select(string|array $table, array $fields): Query
     {
         $select = $this->createMethod(Select::class, $table, $fields)
             ->getQuery();
@@ -44,7 +44,7 @@ class PostgresQueryBuilder extends Builder
         return $select;
     }
 
-    public function insert(string $table, array $fields): Query
+    public function insert(string|array $table, array $fields): Query
     {
         $insert = $this->createMethod(Insert::class, $table, $fields)
             ->getQuery();
@@ -76,7 +76,7 @@ class PostgresQueryBuilder extends Builder
         return $delete;
     }
 
-    public function update(string $table, array $values): Query
+    public function update(string|array $table, array $values): Query
     {
         $update = $this->createMethod(Update::class, $table, $values)
             ->getQuery();
@@ -107,7 +107,7 @@ class PostgresQueryBuilder extends Builder
         return $where;
     }
 
-    public function join(string $table, array $keys): Query
+    public function join(string|array $table, array $keys): Query
     {
         $join = $this->createMethod(Join::class, $table, $keys)
             ->getQuery();
@@ -123,7 +123,7 @@ class PostgresQueryBuilder extends Builder
         return $join;
     }
 
-    public function outJoin(string $table, array $keys): Query
+    public function outJoin(string|array $table, array $keys): Query
     {
         $join = $this->createMethod(OutJoin::class, $table, $keys)
             ->getQuery();
