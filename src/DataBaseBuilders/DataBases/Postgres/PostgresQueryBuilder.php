@@ -21,10 +21,11 @@ use App\DataBaseBuilders\Services\RawQueryBuilderService\RawJoinBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawLimitBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOffsetBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOrderByBuilder;
+use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOrWhereBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOutJoinBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawSelectBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawUpdateBuilder;
-use App\DataBaseBuilders\Services\RawQueryBuilderService\RawWhereBuilder;
+use App\DataBaseBuilders\Services\RawQueryBuilderService\RawAndWhereBuilder;
 
 class PostgresQueryBuilder extends Builder
 {
@@ -92,12 +93,27 @@ class PostgresQueryBuilder extends Builder
         return $update;
     }
 
-    public function where(array $values): Query
+    public function andWhere(array $values): Query
     {
         $where = $this->createMethod(Where::class, null, $values)
             ->getQuery();
 
-        $rawQuery = $this->createRawBuilder(RawWhereBuilder::class, $where)
+        $rawQuery = $this->createRawBuilder(RawAndWhereBuilder::class, $where)
+            ->setMethod()
+            ->setFields()
+            ->getRawQuery();
+
+        $where->setRawQuery($rawQuery);
+
+        return $where;
+    }
+
+    public function orWhere(array $values): Query
+    {
+        $where = $this->createMethod(Where::class, null, $values)
+            ->getQuery();
+
+        $rawQuery = $this->createRawBuilder(RawOrWhereBuilder::class, $where)
             ->setMethod()
             ->setFields()
             ->getRawQuery();

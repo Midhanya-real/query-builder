@@ -5,7 +5,7 @@ namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 use App\DataBaseBuilders\Enums\LogicalOperators;
 use App\DataBaseBuilders\Model\Query;
 
-class RawWhereBuilder implements RawBuilderInterface
+class RawAndWhereBuilder implements RawBuilderInterface
 {
     private string $rawQuery = '';
 
