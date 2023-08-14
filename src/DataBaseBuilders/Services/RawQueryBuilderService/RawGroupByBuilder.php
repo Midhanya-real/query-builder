@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
-use App\DataBaseBuilders\Model\Query;
+use App\DataBaseBuilders\Models\Query;
 
 class RawGroupByBuilder implements RawBuilderInterface
 {

@@ -3,7 +3,7 @@
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods;
 
 use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\LimitQueryFiller;
-use App\DataBaseBuilders\Model\Query;
+use App\DataBaseBuilders\Models\Query;
 
 class Limit extends AbstractMethod
 {
@@ -11,6 +11,6 @@ class Limit extends AbstractMethod
     {
         $query = $this->createFiller(LimitQueryFiller::class, $this->createQuery());
 
-        return $query->getQuery($this->table, $this->fields);
+        return $query->getQuery($this->table, $this->fields, $this->values);
     }
 }

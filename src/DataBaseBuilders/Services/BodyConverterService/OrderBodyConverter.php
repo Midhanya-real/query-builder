@@ -14,9 +14,9 @@ class OrderBodyConverter implements BodyConverterInterface
         $order = [];
         foreach ($fields as $row => $mode) {
             if (!static::isAlias($row)) {
-                $order['fields'][] = "{$row} {$mode}";
+                $order[] = "{$row} {$mode}";
             } else {
-                $order['fields'][] = $mode;
+                $order[] = $mode;
             }
         }
 

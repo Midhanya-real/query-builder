@@ -2,15 +2,19 @@
 
 namespace App\DataBaseBuilders\QueryPartsInterfaces;
 
+use App\DataBaseBuilders\Models\Query;
+
 interface SortMethodsInterface
 {
-    public function limit(int $limit): static;
+    public function andWhere(array $fields, array $values): Query;
 
-    public function offset(int $limit): static;
+    public function orWhere(array $fields, array $values): Query;
 
-    public function groupBy(array $groupColumns): static;
+    public function limit(string $limit): Query;
 
-    public function orderBy(array $orderValues): static;
+    public function offset(string $limit): Query;
 
-    public function having(string $agrFunc, string $sign, string $value): static;
+    public function groupBy(array $groupColumns): Query;
+
+    public function orderBy(array $orderFields): Query;
 }

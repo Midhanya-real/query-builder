@@ -3,13 +3,14 @@
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods;
 
 use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\AbstractQueryFiller;
-use App\DataBaseBuilders\Model\Query;
+use App\DataBaseBuilders\Models\Query;
 
 abstract class AbstractMethod
 {
     public function __construct(
-        protected readonly null|string|array $table = null,
-        protected readonly null|array        $fields = null,
+        protected readonly null|string $table = null,
+        protected readonly null|array  $fields = null,
+        protected readonly null|array  $values = null
     )
     {
     }

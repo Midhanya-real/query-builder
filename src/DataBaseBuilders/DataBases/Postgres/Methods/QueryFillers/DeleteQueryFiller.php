@@ -3,19 +3,19 @@
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
 use App\DataBaseBuilders\Enums\CRUDOperators;
-use App\DataBaseBuilders\Model\Query;
+use App\DataBaseBuilders\Models\Query;
 
 class DeleteQueryFiller extends AbstractQueryFiller
 {
-    protected final function setQuery(?string $table, ?array $fields = null): Query
+    protected final function setQuery(null|string $table, null|array $fields, null|array $values): Query
     {
         return $this->query
             ->setMethod(CRUDOperators::DELETE->value)
             ->setTable($table);
     }
 
-    public function getQuery(?string $table, ?array $fields = null): Query
+    public function getQuery(null|string $table, null|array $fields, null|array $values): Query
     {
-        return $this->setQuery($table);
+        return $this->setQuery($table, $fields, $values);
     }
 }

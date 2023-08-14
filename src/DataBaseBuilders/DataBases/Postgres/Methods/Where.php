@@ -3,7 +3,7 @@
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods;
 
 use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\WhereQueryFiller;
-use App\DataBaseBuilders\Model\Query;
+use App\DataBaseBuilders\Models\Query;
 
 class Where extends AbstractMethod
 {
@@ -11,6 +11,6 @@ class Where extends AbstractMethod
     {
         $query = $this->createFiller(WhereQueryFiller::class, $this->createQuery());
 
-        return $query->getQuery(null, $this->fields);
+        return $query->getQuery($this->table, $this->fields, $this->values);
     }
 }

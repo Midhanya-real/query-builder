@@ -3,7 +3,7 @@
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods;
 
 use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\DeleteQueryFiller;
-use App\DataBaseBuilders\Model\Query;
+use App\DataBaseBuilders\Models\Query;
 
 final class Delete extends AbstractMethod
 {
@@ -11,6 +11,6 @@ final class Delete extends AbstractMethod
     {
         $query = $this->createFiller(DeleteQueryFiller::class, $this->createQuery());
 
-        return $query->getQuery($this->table);
+        return $query->getQuery($this->table, $this->fields, $this->values);
     }
 }

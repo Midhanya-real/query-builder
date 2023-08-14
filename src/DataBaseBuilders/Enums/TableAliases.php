@@ -12,4 +12,5 @@ enum TableAliases: string
     case FULL_OUTER_JOIN = 'FULL OUTER JOIN';
     case ON = 'ON';
     case AS = 'AS';
+    case ALL = '*';
 }

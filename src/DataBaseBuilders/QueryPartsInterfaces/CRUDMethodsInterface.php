@@ -2,15 +2,15 @@
 
 namespace App\DataBaseBuilders\QueryPartsInterfaces;
 
+use App\DataBaseBuilders\Models\Query;
+
 interface CRUDMethodsInterface
 {
-    public function select(string $table, array $fields): string;
+    public function select(string $table, array $fields): Query;
 
-    public function insert(string $table, array $fields): static;
+    public function insert(string $table, array $fields, array $values): Query;
 
-    public function delete(string $table): static;
+    public function delete(string $table): Query;
 
-    public function update(string $table, array $values): static;
-
-    public function where(array $condition): static;
+    public function update(string $table, array $fields, array $values): Query;
 }

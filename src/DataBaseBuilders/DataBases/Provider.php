@@ -10,4 +10,9 @@ class Provider
     {
         return new PostgresQueryBuilder();
     }
+
+    public function mysql()
+    {
+        //return MysqlQueryBuilder
+    }
 }

@@ -3,13 +3,11 @@
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
 use App\DataBaseBuilders\Enums\CRUDOperators;
-use App\DataBaseBuilders\Model\Query;
-use App\DataBaseBuilders\Services\BodyConverterService\SelectBodyConverter;
-use App\DataBaseBuilders\Services\BodyConverterService\TableBodyConverter;
+use App\DataBaseBuilders\Models\Query;
 
-class SelectQueryFiller extends AbstractQueryFiller
+final class SelectQueryFiller extends AbstractQueryFiller
 {
-    protected final function setQuery(null|string|array $table, ?array $fields): Query
+    protected function setQuery(null|string $table, null|array $fields, null|array $values): Query
     {
         return $this->query
             ->setMethod(CRUDOperators::SELECT->value)
@@ -17,15 +15,9 @@ class SelectQueryFiller extends AbstractQueryFiller
             ->setFields($fields);
     }
 
-    public function getQuery(null|string|array $table, null|array $fields): Query
+    public function getQuery(null|string $table, null|array $fields, null|array $values): Query
     {
-        if (static::isAlias($table)) {
-            $table = TableBodyConverter::convert($table);
-        }
-
-        $fields = SelectBodyConverter::convert($fields);
-
-        return $this->setQuery($table, $fields);
+        return $this->setQuery($table, $fields, $values);
     }
 
 }

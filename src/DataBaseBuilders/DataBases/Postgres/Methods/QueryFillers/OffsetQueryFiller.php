@@ -3,19 +3,19 @@
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
 use App\DataBaseBuilders\Enums\SortOperators;
-use App\DataBaseBuilders\Model\Query;
+use App\DataBaseBuilders\Models\Query;
 
 class OffsetQueryFiller extends AbstractQueryFiller
 {
-    protected function setQuery(?string $table, ?array $fields): Query
+    protected function setQuery(null|string $table, null|array $fields, null|array $values): Query
     {
         return $this->query
             ->setMethod(SortOperators::OFFSET->value)
             ->setValues($fields);
     }
 
-    public function getQuery(?string $table, ?array $fields): Query
+    public function getQuery(null|string $table, null|array $fields, null|array $values): Query
     {
-        return $this->setQuery(null, $fields);
+        return $this->setQuery($table, $fields, $values);
     }
 }

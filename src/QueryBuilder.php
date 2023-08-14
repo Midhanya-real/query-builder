@@ -2,12 +2,24 @@
 
 namespace App;
 
-use App\Connection\Connection;
+use App\DataBaseBuilders\Fetch\Fetch;
+use App\DataBaseBuilders\Handlers\PostgresHandler;
+use App\DataBaseBuilders\Models\Pool;
 
-class QueryBuilder
+class QueryBuilder extends AbstractQueryBuilder
 {
-    public function getDataBase(): Connection
+    public function createBuilder(): PostgresHandler
     {
-        return Connection::getInstance();
+        $provider = $this->createProvider();
+        $pool = $this->createPool();
+
+        return $this->createHandler($provider, $pool);
+    }
+
+    public function fetch(Pool $pool): Fetch
+    {
+        $connection = $this->createConnection()->getConnection()->connect();
+
+        return $this->createFetch($connection, $pool);
     }
 }

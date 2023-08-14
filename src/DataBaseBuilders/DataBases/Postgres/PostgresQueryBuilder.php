@@ -13,7 +13,8 @@ use App\DataBaseBuilders\DataBases\Postgres\Methods\OutJoin;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Select;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Update;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Where;
-use App\DataBaseBuilders\Model\Query;
+use App\DataBaseBuilders\Models\Query;
+use App\DataBaseBuilders\Services\RawQueryBuilderService\RawAndWhereBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawDeleteBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawGroupByBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawInsertBuilder;
@@ -25,11 +26,10 @@ use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOrWhereBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOutJoinBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawSelectBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawUpdateBuilder;
-use App\DataBaseBuilders\Services\RawQueryBuilderService\RawAndWhereBuilder;
 
-class PostgresQueryBuilder extends Builder
+class PostgresQueryBuilder extends Builder implements PostgresQueryBuilderInterface
 {
-    public function select(string|array $table, array $fields): Query
+    public function select(string $table, array $fields): Query
     {
         $select = $this->createMethod(Select::class, $table, $fields)
             ->getQuery();
@@ -45,9 +45,9 @@ class PostgresQueryBuilder extends Builder
         return $select;
     }
 
-    public function insert(string|array $table, array $fields): Query
+    public function insert(string $table, array $fields, array $values): Query
     {
-        $insert = $this->createMethod(Insert::class, $table, $fields)
+        $insert = $this->createMethod(Insert::class, $table, $fields, $values)
             ->getQuery();
 
         $rowQuery = $this->createRawBuilder(RawInsertBuilder::class, $insert)
@@ -77,9 +77,9 @@ class PostgresQueryBuilder extends Builder
         return $delete;
     }
 
-    public function update(string|array $table, array $values): Query
+    public function update(string $table, array $fields, array $values): Query
     {
-        $update = $this->createMethod(Update::class, $table, $values)
+        $update = $this->createMethod(Update::class, $table, $fields, $values)
             ->getQuery();
 
         $rowQuery = $this->createRawBuilder(RawUpdateBuilder::class, $update)
@@ -93,9 +93,9 @@ class PostgresQueryBuilder extends Builder
         return $update;
     }
 
-    public function andWhere(array $values): Query
+    public function andWhere(array $fields, array $values): Query
     {
-        $where = $this->createMethod(Where::class, null, $values)
+        $where = $this->createMethod(Where::class, null, $fields, $values)
             ->getQuery();
 
         $rawQuery = $this->createRawBuilder(RawAndWhereBuilder::class, $where)
@@ -108,9 +108,9 @@ class PostgresQueryBuilder extends Builder
         return $where;
     }
 
-    public function orWhere(array $values): Query
+    public function orWhere(array $fields, array $values): Query
     {
-        $where = $this->createMethod(Where::class, null, $values)
+        $where = $this->createMethod(Where::class, null, $fields, $values)
             ->getQuery();
 
         $rawQuery = $this->createRawBuilder(RawOrWhereBuilder::class, $where)
@@ -123,9 +123,9 @@ class PostgresQueryBuilder extends Builder
         return $where;
     }
 
-    public function join(string|array $table, array $keys): Query
+    public function join(string $table, array $fields, array $values): Query
     {
-        $join = $this->createMethod(Join::class, $table, $keys)
+        $join = $this->createMethod(Join::class, $table, $fields, $values)
             ->getQuery();
 
         $rawQuery = $this->createRawBuilder(RawJoinBuilder::class, $join)
@@ -139,9 +139,9 @@ class PostgresQueryBuilder extends Builder
         return $join;
     }
 
-    public function outJoin(string|array $table, array $keys): Query
+    public function outJoin(string $table, array $fields, array $values): Query
     {
-        $join = $this->createMethod(OutJoin::class, $table, $keys)
+        $join = $this->createMethod(OutJoin::class, $table, $fields, $values)
             ->getQuery();
 
         $rawQuery = $this->createRawBuilder(RawOutJoinBuilder::class, $join)

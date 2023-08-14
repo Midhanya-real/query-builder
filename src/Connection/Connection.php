@@ -4,26 +4,12 @@ namespace App\Connection;
 
 use App\Connection\Config\DbConfig;
 use App\Connection\Config\DnsConfig;
+use App\Connection\Connections\ConnectionInterface;
 use App\Connection\Connections\PDOConnection;
 use App\Connection\Services\ConnectionService\DnsBuilder;
 
 final class Connection
 {
-    private static ?Connection $connection;
-
-    private function __construct()
-    {
-    }
-
-    public static function getInstance(): ?Connection
-    {
-        if (is_null(self::$connection)) {
-            self::$connection = new Connection();
-        }
-
-        return self::$connection;
-    }
-
     private function setConfig(): DbConfig
     {
         $config = new DbConfig();
@@ -51,7 +37,7 @@ final class Connection
             ->getDns();
     }
 
-    public function getConnection(): PDOConnection
+    public function getConnection(): ConnectionInterface
     {
         $config = $this->setConfig();
         $dns = $this->setDns($config);
