@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
-use App\DataBaseBuilders\Model\Query;
+use App\DataBaseBuilders\Models\Query;
 
 abstract class AbstractQueryFiller
 {

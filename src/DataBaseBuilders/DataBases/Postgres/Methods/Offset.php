@@ -3,7 +3,7 @@
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods;
 
 use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\OffsetQueryFiller;
-use App\DataBaseBuilders\Model\Query;
+use App\DataBaseBuilders\Models\Query;
 
 class Offset extends AbstractMethod
 {

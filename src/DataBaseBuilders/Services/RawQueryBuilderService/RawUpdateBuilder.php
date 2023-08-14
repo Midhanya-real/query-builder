@@ -3,7 +3,7 @@
 namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
 use App\DataBaseBuilders\Enums\TableAliases;
-use App\DataBaseBuilders\Model\Query;
+use App\DataBaseBuilders\Models\Query;
 
 class RawUpdateBuilder implements RawBuilderInterface
 {

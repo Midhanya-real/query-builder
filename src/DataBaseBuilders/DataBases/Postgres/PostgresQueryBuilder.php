@@ -13,7 +13,7 @@ use App\DataBaseBuilders\DataBases\Postgres\Methods\OutJoin;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Select;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Update;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Where;
-use App\DataBaseBuilders\Model\Query;
+use App\DataBaseBuilders\Models\Query;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawAndWhereBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawDeleteBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawGroupByBuilder;

@@ -3,12 +3,13 @@
 namespace App;
 
 use App\Connection\Connection;
+use App\DataBaseBuilders\Fetch\Fetch;
 use App\DataBaseBuilders\Handlers\PostgresHandler;
-use App\DataBaseBuilders\Model\Pool;
+use App\DataBaseBuilders\Models\Pool;
 
 class QueryBuilder
 {
-    private function getDataBase(): Connection
+    private function createConnection(): Connection
     {
         return new Connection();
     }
@@ -18,7 +19,7 @@ class QueryBuilder
         return new Pool();
     }
 
-    private function getHandler(): PostgresHandler
+    private function createHandler(): PostgresHandler
     {
         return new PostgresHandler($this->createPool());
     }

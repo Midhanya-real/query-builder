@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataBaseBuilders\Model;
+namespace App\DataBaseBuilders\Models;
 
 class Pool
 {
@@ -39,12 +39,10 @@ class Pool
 
     public function getParams(): array
     {
-        $params = [];
-
         foreach ($this->getQueries() as $query) {
-            $params = array_merge($params, $query->getValues());
+            $this->params = array_merge($this->params, $query->getValues());
         }
 
-        return $params;
+        return $this->params;
     }
 }

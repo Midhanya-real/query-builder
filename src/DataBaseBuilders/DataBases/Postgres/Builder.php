@@ -3,7 +3,7 @@
 namespace App\DataBaseBuilders\DataBases\Postgres;
 
 use App\DataBaseBuilders\DataBases\Postgres\Methods\AbstractMethod;
-use App\DataBaseBuilders\Model\Query;
+use App\DataBaseBuilders\Models\Query;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawBuilderInterface;
 
 class Builder

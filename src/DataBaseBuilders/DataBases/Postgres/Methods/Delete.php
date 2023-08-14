@@ -3,7 +3,7 @@
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods;
 
 use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\DeleteQueryFiller;
-use App\DataBaseBuilders\Model\Query;
+use App\DataBaseBuilders\Models\Query;
 
 final class Delete extends AbstractMethod
 {

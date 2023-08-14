@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataBaseBuilders\Model;
+namespace App\DataBaseBuilders\Models;
 
 class Query
 {

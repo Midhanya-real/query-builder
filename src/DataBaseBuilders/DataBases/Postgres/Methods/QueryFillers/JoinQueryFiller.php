@@ -3,7 +3,7 @@
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
 use App\DataBaseBuilders\Enums\TableAliases;
-use App\DataBaseBuilders\Model\Query;
+use App\DataBaseBuilders\Models\Query;
 
 class JoinQueryFiller extends AbstractQueryFiller
 {

@@ -4,7 +4,7 @@ namespace App\DataBaseBuilders\Handlers;
 
 use App\DataBaseBuilders\DataBases\Postgres\PostgresQueryBuilder;
 use App\DataBaseBuilders\DataBases\Postgres\PostgresQueryBuilderInterface;
-use App\DataBaseBuilders\Model\Pool;
+use App\DataBaseBuilders\Models\Pool;
 use App\DataBaseBuilders\Validators\BuilderValidators\PostgresValidator;
 
 class PostgresHandler
