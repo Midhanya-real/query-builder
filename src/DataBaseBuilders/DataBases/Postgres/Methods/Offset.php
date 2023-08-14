@@ -11,6 +11,6 @@ class Offset extends AbstractMethod
     {
         $query = $this->createFiller(OffsetQueryFiller::class, $this->createQuery());
 
-        return $query->getQuery($this->table, $this->fields);
+        return $query->getQuery($this->table, $this->fields, $this->values);
     }
 }

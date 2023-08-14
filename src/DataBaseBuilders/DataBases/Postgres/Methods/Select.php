@@ -11,6 +11,6 @@ final class Select extends AbstractMethod
     {
         $query = $this->createFiller(SelectQueryFiller::class, $this->createQuery());
 
-        return $query->getQuery($this->table, $this->fields);
+        return $query->getQuery($this->table, $this->fields, $this->values);
     }
 }

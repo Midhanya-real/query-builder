@@ -11,6 +11,6 @@ class Where extends AbstractMethod
     {
         $query = $this->createFiller(WhereQueryFiller::class, $this->createQuery());
 
-        return $query->getQuery(null, $this->fields);
+        return $query->getQuery($this->table, $this->fields, $this->values);
     }
 }

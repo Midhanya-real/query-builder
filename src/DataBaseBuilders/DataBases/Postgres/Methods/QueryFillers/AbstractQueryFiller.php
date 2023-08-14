@@ -18,7 +18,7 @@ abstract class AbstractQueryFiller
         return is_array($table);
     }
 
-    abstract protected function setQuery(null|string $table, null|array $fields): Query;
+    abstract protected function setQuery(null|string $table, null|array $fields, null|array $values): Query;
 
-    abstract public function getQuery(null|string $table, null|array $fields): Query;
+    abstract public function getQuery(null|string $table, null|array $fields, null|array $values): Query;
 }

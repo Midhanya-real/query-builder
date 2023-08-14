@@ -11,6 +11,6 @@ final class Delete extends AbstractMethod
     {
         $query = $this->createFiller(DeleteQueryFiller::class, $this->createQuery());
 
-        return $query->getQuery($this->table);
+        return $query->getQuery($this->table, $this->fields, $this->values);
     }
 }

@@ -10,6 +10,7 @@ abstract class AbstractMethod
     public function __construct(
         protected readonly null|string|array $table = null,
         protected readonly null|array        $fields = null,
+        protected readonly null|array        $values = null
     )
     {
     }

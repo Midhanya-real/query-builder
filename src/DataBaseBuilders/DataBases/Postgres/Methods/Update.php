@@ -11,6 +11,6 @@ final class Update extends AbstractMethod
     {
         $query = $this->createFiller(UpdateQueryFiller::class, $this->createQuery());
 
-        return $query->getQuery($this->table, $this->fields);
+        return $query->getQuery($this->table, $this->fields, $this->values);
     }
 }

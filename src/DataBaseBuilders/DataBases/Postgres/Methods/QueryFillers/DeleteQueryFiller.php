@@ -7,15 +7,15 @@ use App\DataBaseBuilders\Model\Query;
 
 class DeleteQueryFiller extends AbstractQueryFiller
 {
-    protected final function setQuery(?string $table, ?array $fields = null): Query
+    protected final function setQuery(?string $table, null|array $fields, null|array $values): Query
     {
         return $this->query
             ->setMethod(CRUDOperators::DELETE->value)
             ->setTable($table);
     }
 
-    public function getQuery(?string $table, ?array $fields = null): Query
+    public function getQuery(?string $table, null|array $fields, null|array $values): Query
     {
-        return $this->setQuery($table);
+        return $this->setQuery($table, $fields, $values);
     }
 }

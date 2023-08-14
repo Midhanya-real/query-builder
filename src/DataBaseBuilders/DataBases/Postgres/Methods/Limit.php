@@ -11,6 +11,6 @@ class Limit extends AbstractMethod
     {
         $query = $this->createFiller(LimitQueryFiller::class, $this->createQuery());
 
-        return $query->getQuery($this->table, $this->fields);
+        return $query->getQuery($this->table, $this->fields, $this->values);
     }
 }
