@@ -9,21 +9,6 @@ use App\Connection\Services\ConnectionService\DnsBuilder;
 
 final class Connection
 {
-    private static ?Connection $connection;
-
-    private function __construct()
-    {
-    }
-
-    public static function getInstance(): ?Connection
-    {
-        if (is_null(self::$connection)) {
-            self::$connection = new Connection();
-        }
-
-        return self::$connection;
-    }
-
     private function setConfig(): DbConfig
     {
         $config = new DbConfig();

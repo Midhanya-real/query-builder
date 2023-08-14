@@ -10,7 +10,7 @@ class QueryBuilder
 {
     private function getDataBase(): Connection
     {
-        return Connection::getInstance();
+        return new Connection();
     }
 
     private function createPool(): Pool

@@ -2,9 +2,11 @@
 
 namespace App\DataBaseBuilders\QueryPartsInterfaces;
 
+use App\DataBaseBuilders\Model\Query;
+
 interface LinksMethodsInterface
 {
-    public function join(string $table, array $keys): static;
+    public function join(string $table, array $fields, array $values): Query;
 
-    public function outJoin(string $table, array $keys): static;
+    public function outJoin(string $table, array $fields, array $values): Query;
 }

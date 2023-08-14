@@ -7,7 +7,7 @@ use App\DataBaseBuilders\Model\Query;
 
 final class SelectQueryFiller extends AbstractQueryFiller
 {
-    protected function setQuery(null|string|array $table, null|array $fields, null|array $values): Query
+    protected function setQuery(null|string $table, null|array $fields, null|array $values): Query
     {
         return $this->query
             ->setMethod(CRUDOperators::SELECT->value)
@@ -15,7 +15,7 @@ final class SelectQueryFiller extends AbstractQueryFiller
             ->setFields($fields);
     }
 
-    public function getQuery(null|string|array $table, null|array $fields, null|array $values): Query
+    public function getQuery(null|string $table, null|array $fields, null|array $values): Query
     {
         return $this->setQuery($table, $fields, $values);
     }

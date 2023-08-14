@@ -7,7 +7,7 @@ use App\DataBaseBuilders\Model\Query;
 
 class InsertQueryFiller extends AbstractQueryFiller
 {
-    protected final function setQuery(null|string|array $table, null|array $fields, null|array $values): Query
+    protected final function setQuery(null|string $table, null|array $fields, null|array $values): Query
     {
         return $this->query
             ->setMethod(CRUDOperators::INSERT->value)
@@ -16,7 +16,7 @@ class InsertQueryFiller extends AbstractQueryFiller
             ->setValues($values);
     }
 
-    public function getQuery(null|string|array $table, null|array $fields, null|array $values): Query
+    public function getQuery(null|string $table, null|array $fields, null|array $values): Query
     {
         return $this->setQuery($table, $fields, $values);
     }

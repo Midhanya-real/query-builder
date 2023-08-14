@@ -29,7 +29,7 @@ use App\DataBaseBuilders\Services\RawQueryBuilderService\RawUpdateBuilder;
 
 class PostgresQueryBuilder extends Builder
 {
-    public function select(string|array $table, array $fields): Query
+    public function select(string $table, array $fields): Query
     {
         $select = $this->createMethod(Select::class, $table, $fields)
             ->getQuery();
@@ -45,7 +45,7 @@ class PostgresQueryBuilder extends Builder
         return $select;
     }
 
-    public function insert(string|array $table, array $fields, array $values): Query
+    public function insert(string $table, array $fields, array $values): Query
     {
         $insert = $this->createMethod(Insert::class, $table, $fields, $values)
             ->getQuery();
@@ -77,7 +77,7 @@ class PostgresQueryBuilder extends Builder
         return $delete;
     }
 
-    public function update(string|array $table, array $fields, array $values): Query
+    public function update(string $table, array $fields, array $values): Query
     {
         $update = $this->createMethod(Update::class, $table, $fields, $values)
             ->getQuery();
@@ -123,7 +123,7 @@ class PostgresQueryBuilder extends Builder
         return $where;
     }
 
-    public function join(string|array $table, array $fields, array $values): Query
+    public function join(string $table, array $fields, array $values): Query
     {
         $join = $this->createMethod(Join::class, $table, $fields, $values)
             ->getQuery();
@@ -139,7 +139,7 @@ class PostgresQueryBuilder extends Builder
         return $join;
     }
 
-    public function outJoin(string|array $table, array $fields, array $values): Query
+    public function outJoin(string $table, array $fields, array $values): Query
     {
         $join = $this->createMethod(OutJoin::class, $table, $fields, $values)
             ->getQuery();

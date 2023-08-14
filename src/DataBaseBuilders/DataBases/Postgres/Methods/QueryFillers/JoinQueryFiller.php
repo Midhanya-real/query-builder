@@ -7,7 +7,7 @@ use App\DataBaseBuilders\Model\Query;
 
 class JoinQueryFiller extends AbstractQueryFiller
 {
-    protected function setQuery(null|string|array $table, null|array $fields, null|array $values): Query
+    protected function setQuery(null|string $table, null|array $fields, null|array $values): Query
     {
         return $this->query
             ->setMethod(TableAliases::JOIN->value)
@@ -16,7 +16,7 @@ class JoinQueryFiller extends AbstractQueryFiller
             ->setValues($values);
     }
 
-    public function getQuery(null|string|array $table, null|array $fields, null|array $values): Query
+    public function getQuery(null|string $table, null|array $fields, null|array $values): Query
     {
         return $this->setQuery($table, $fields, $values);
     }
