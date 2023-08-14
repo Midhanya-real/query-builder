@@ -20,7 +20,7 @@ class PostgresHandler
         return new PostgresQueryBuilder();
     }
 
-    public function select(string|array $table, array $body): static
+    public function select(string|array $table, array|null $body = null): static
     {
         $table = PostgresValidator::getValidTable($table);
         $body = PostgresValidator::getValidSelectBody($body);
