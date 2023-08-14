@@ -2,6 +2,7 @@
 
 namespace App\DataBaseBuilders\Validators\BuilderValidators;
 
+use App\DataBaseBuilders\Enums\TableAliases;
 use App\DataBaseBuilders\Services\BodyConverterService\InsertBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\OrderBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\SelectBodyConverter;
@@ -19,7 +20,9 @@ class PostgresValidator
 
     public static function getValidSelectBody(array|null $body): array
     {
-        return SelectBodyConverter::convert($body);
+        return empty($body)
+            ? [TableAliases::ALL->value]
+            : SelectBodyConverter::convert($body);
     }
 
     public static function getValidInsertBody(array $body): array

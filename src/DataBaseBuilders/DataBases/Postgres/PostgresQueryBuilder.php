@@ -27,7 +27,7 @@ use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOutJoinBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawSelectBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawUpdateBuilder;
 
-class PostgresQueryBuilder extends Builder
+class PostgresQueryBuilder extends Builder implements PostgresQueryBuilderInterface
 {
     public function select(string $table, array $fields): Query
     {
