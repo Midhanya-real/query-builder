@@ -6,4 +6,3 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 $builder = new \App\QueryBuilder();
-
