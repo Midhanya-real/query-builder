@@ -8,9 +8,9 @@ class Query
 
     private string $table;
 
-    private array|null $fields = null;
+    private array $fields;
 
-    private array|null $values = null;
+    private array $values = [];
 
     private string $rawQuery;
 
@@ -64,9 +64,9 @@ class Query
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getFields(): array|null
+    public function getFields(): array
     {
         return $this->fields;
     }
@@ -83,9 +83,9 @@ class Query
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getValues(): array|null
+    public function getValues(): array
     {
         return $this->values;
     }

@@ -33,7 +33,7 @@ class RawLimitBuilder implements RawBuilderInterface
 
     public function setValues(): static
     {
-        $this->rowQuery .= implode(', ', $this->query->getValues()) . " ";
+        $this->rowQuery .= "?" . " ";
 
         return $this;
     }

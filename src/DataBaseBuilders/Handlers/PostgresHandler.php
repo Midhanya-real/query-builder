@@ -83,8 +83,8 @@ class PostgresHandler
     public function join(string|array $table, array $body): static
     {
         $table = PostgresValidator::getValidTable($table);
-        $body = PostgresValidator::getValidUpdateBody($body);
-        $query = $this->queryBuilder->join($table, $body['fields'], $body['values']);
+        $body = PostgresValidator::getValidJoinBody($body);
+        $query = $this->queryBuilder->join($table, $body['fields'], []);
 
         $this->pool->setQueries($query);
 
@@ -94,8 +94,8 @@ class PostgresHandler
     public function outJoin(string|array $table, array $body): static
     {
         $table = PostgresValidator::getValidTable($table);
-        $body = PostgresValidator::getValidUpdateBody($body);
-        $query = $this->queryBuilder->outJoin($table, $body['fields'], $body['values']);
+        $body = PostgresValidator::getValidJoinBody($body);
+        $query = $this->queryBuilder->outJoin($table, $body['fields'], []);
 
         $this->pool->setQueries($query);
 

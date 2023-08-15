@@ -4,6 +4,7 @@ namespace App\DataBaseBuilders\Validators\BuilderValidators;
 
 use App\DataBaseBuilders\Enums\TableAliases;
 use App\DataBaseBuilders\Services\BodyConverterService\InsertBodyConverter;
+use App\DataBaseBuilders\Services\BodyConverterService\JoinBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\OrderBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\SelectBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\TableBodyConverter;
@@ -38,5 +39,10 @@ class PostgresValidator
     public static function getValidOrderBody(array $body): array
     {
         return OrderBodyConverter::convert($body);
+    }
+
+    public static function getValidJoinBody(array $body): array|string
+    {
+        return JoinBodyConverter::convert($body);
     }
 }
