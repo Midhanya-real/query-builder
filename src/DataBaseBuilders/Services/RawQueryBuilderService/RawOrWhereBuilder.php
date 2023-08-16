@@ -3,7 +3,7 @@
 namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
 use App\DataBaseBuilders\Enums\LogicalOperators;
-use App\DataBaseBuilders\Models\Query;
+use App\DataBaseBuilders\QueryModels\Query;
 
 class RawOrWhereBuilder implements RawBuilderInterface
 {

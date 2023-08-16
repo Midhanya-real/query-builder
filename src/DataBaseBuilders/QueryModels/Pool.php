@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataBaseBuilders\Models;
+namespace App\DataBaseBuilders\QueryModels;
 
 class Pool
 {

@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
-use App\DataBaseBuilders\Models\Query;
+use App\DataBaseBuilders\QueryModels\Query;
 
 class RawGroupByBuilder implements RawBuilderInterface
 {
@@ -21,15 +21,15 @@ class RawGroupByBuilder implements RawBuilderInterface
         return $this;
     }
 
+    public function setTable(): static
+    {
+        return $this;
+    }
+
     public function setFields(): static
     {
         $this->rowQuery .= implode(', ', $this->query->getFields()) . " ";
 
-        return $this;
-    }
-
-    public function setTable(): static
-    {
         return $this;
     }
 

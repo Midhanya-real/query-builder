@@ -4,7 +4,7 @@ namespace App;
 
 use App\DataBaseBuilders\Fetch\Fetch;
 use App\DataBaseBuilders\Handlers\PostgresHandler;
-use App\DataBaseBuilders\Models\Pool;
+use App\DataBaseBuilders\QueryModels\Pool;
 
 class QueryBuilder extends AbstractQueryBuilder
 {

@@ -13,17 +13,14 @@ use App\DataBaseBuilders\DataBases\Postgres\Methods\OutJoin;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Select;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Update;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Where;
-use App\DataBaseBuilders\Models\Query;
+use App\DataBaseBuilders\QueryModels\Query;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawAndWhereBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawDeleteBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawGroupByBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawInsertBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawJoinBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawLimitBuilder;
-use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOffsetBuilder;
-use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOrderByBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOrWhereBuilder;
-use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOutJoinBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawSelectBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawUpdateBuilder;
 
@@ -144,7 +141,7 @@ class PostgresQueryBuilder extends Builder implements PostgresQueryBuilderInterf
         $join = $this->createMethod(OutJoin::class, $table, $fields, $values)
             ->getQuery();
 
-        $rawQuery = $this->createRawBuilder(RawOutJoinBuilder::class, $join)
+        $rawQuery = $this->createRawBuilder(RawJoinBuilder::class, $join)
             ->setMethod()
             ->setTable()
             ->setFields()
@@ -175,7 +172,7 @@ class PostgresQueryBuilder extends Builder implements PostgresQueryBuilderInterf
         $offset = $this->createMethod(Offset::class, null, [$limit])
             ->getQuery();
 
-        $rawQuery = $this->createRawBuilder(RawOffsetBuilder::class, $offset)
+        $rawQuery = $this->createRawBuilder(RawLimitBuilder::class, $offset)
             ->setMethod()
             ->setValues()
             ->getRawQuery();
@@ -205,7 +202,7 @@ class PostgresQueryBuilder extends Builder implements PostgresQueryBuilderInterf
         $orderBy = $this->createMethod(OrderBy::class, null, $orderFields)
             ->getQuery();
 
-        $rawQuery = $this->createRawBuilder(RawOrderByBuilder::class, $orderBy)
+        $rawQuery = $this->createRawBuilder(RawGroupByBuilder::class, $orderBy)
             ->setMethod()
             ->setFields()
             ->getRawQuery();

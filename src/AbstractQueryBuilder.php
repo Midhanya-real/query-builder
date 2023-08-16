@@ -6,7 +6,7 @@ use App\Connection\Connection;
 use App\DataBaseBuilders\DataBases\Provider;
 use App\DataBaseBuilders\Fetch\Fetch;
 use App\DataBaseBuilders\Handlers\PostgresHandler;
-use App\DataBaseBuilders\Models\Pool;
+use App\DataBaseBuilders\QueryModels\Pool;
 use PDO;
 
 abstract class AbstractQueryBuilder

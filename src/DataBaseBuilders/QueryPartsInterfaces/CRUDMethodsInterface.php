@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\QueryPartsInterfaces;
 
-use App\DataBaseBuilders\Models\Query;
+use App\DataBaseBuilders\QueryModels\Query;
 
 interface CRUDMethodsInterface
 {

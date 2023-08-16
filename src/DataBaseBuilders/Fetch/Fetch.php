@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\Fetch;
 
-use App\DataBaseBuilders\Models\Pool;
+use App\DataBaseBuilders\QueryModels\Pool;
 use PDO;
 
 class Fetch
