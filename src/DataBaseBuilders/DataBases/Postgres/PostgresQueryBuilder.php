@@ -14,6 +14,7 @@ use App\DataBaseBuilders\DataBases\Postgres\Methods\OutJoin;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Select;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Update;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Where;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\With;
 use App\DataBaseBuilders\QueryModels\Query;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawAndWhereBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawDeleteBuilder;
@@ -228,5 +229,20 @@ class PostgresQueryBuilder extends Builder implements PostgresQueryBuilderInterf
         $having->setRawQuery($rawQuery);
 
         return $having;
+    }
+
+    public function with(array $fields): Query
+    {
+        $with = $this->createMethod(With::class, null, $fields)
+            ->getQuery();
+
+        $rawQuery = $this->createRawBuilder(RawGroupByBuilder::class, $with)
+            ->setMethod()
+            ->setFields()
+            ->getRawQuery();
+
+        $with->setRawQuery($rawQuery);
+
+        return $with;
     }
 }

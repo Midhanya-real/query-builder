@@ -9,4 +9,6 @@ interface LinkMethodsInterface
     public function join(string $table, array $fields, array $values): Query;
 
     public function outJoin(string $table, array $fields, array $values): Query;
+
+    public function with(array $fields): Query;
 }

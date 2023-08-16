@@ -10,6 +10,7 @@ enum TableAliases: string
     case SET = 'SET';
     case JOIN = 'JOIN';
     case FULL_OUTER_JOIN = 'FULL OUTER JOIN';
+    case WITH = 'WITH';
     case ON = 'ON';
     case AS = 'AS';
     case ALL = '*';

@@ -26,13 +26,15 @@ class Pool
         return $this->queries;
     }
 
-    public function getQuery(): string
+    public function getQuery(bool $end = false): string
     {
         foreach ($this->getQueries() as $query) {
             $this->query .= $query->getRawQuery() . " ";
         }
 
-        $this->query .= ';';
+        if ($end) {
+            $this->query .= ";";
+        }
 
         return $this->query;
     }
