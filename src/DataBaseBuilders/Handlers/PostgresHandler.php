@@ -138,6 +138,16 @@ class PostgresHandler
         return $this;
     }
 
+    public function having(array $agrFunc, string $alias, string $value): static
+    {
+        $body = PostgresValidator::getValidHavingBody($agrFunc, $alias, $value);
+        $query = $this->queryBuilder->having($body['fields'], $body['values']);
+
+        $this->pool->setQueries($query);
+
+        return $this;
+    }
+
     public function getQuery(): Pool
     {
         return $this->pool;

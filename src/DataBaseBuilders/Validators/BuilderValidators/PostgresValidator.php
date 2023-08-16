@@ -3,6 +3,7 @@
 namespace App\DataBaseBuilders\Validators\BuilderValidators;
 
 use App\DataBaseBuilders\Enums\TableAliases;
+use App\DataBaseBuilders\Services\BodyConverterService\AggregateFuncBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\InsertBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\JoinBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\OrderBodyConverter;
@@ -24,6 +25,16 @@ class PostgresValidator
         return empty($body)
             ? [TableAliases::ALL->value]
             : SelectBodyConverter::convert($body);
+    }
+
+    public static function getValidHavingBody(array $agrFunc, string $alias, string $value): array
+    {
+        $queryBody = AggregateFuncBodyConverter::convert($agrFunc) . " " . $alias . " " . "?";
+
+        $body['fields'][] = $queryBody;
+        $body['values'][] = $value;
+
+        return $body;
     }
 
     public static function getValidInsertBody(array $body): array

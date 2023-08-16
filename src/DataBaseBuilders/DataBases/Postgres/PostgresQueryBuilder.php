@@ -4,6 +4,7 @@ namespace App\DataBaseBuilders\DataBases\Postgres;
 
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Delete;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\GroupBy;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\Having;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Insert;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Join;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Limit;
@@ -17,6 +18,7 @@ use App\DataBaseBuilders\QueryModels\Query;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawAndWhereBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawDeleteBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawGroupByBuilder;
+use App\DataBaseBuilders\Services\RawQueryBuilderService\RawHavingBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawInsertBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawJoinBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawLimitBuilder;
@@ -210,5 +212,21 @@ class PostgresQueryBuilder extends Builder implements PostgresQueryBuilderInterf
         $orderBy->setRawQuery($rawQuery);
 
         return $orderBy;
+    }
+
+    public function having(array $fields, array $values): Query
+    {
+        $having = $this->createMethod(Having::class, null, $fields, $values)
+            ->getQuery();
+
+        $rawQuery = $this->createRawBuilder(RawHavingBuilder::class, $having)
+            ->setMethod()
+            ->setFields()
+            ->setValues()
+            ->getRawQuery();
+
+        $having->setRawQuery($rawQuery);
+
+        return $having;
     }
 }
