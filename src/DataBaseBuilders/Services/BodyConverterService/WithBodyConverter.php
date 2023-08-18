@@ -8,10 +8,14 @@ class WithBodyConverter implements BodyConverterInterface
 {
     public static function convert(array $fields): array
     {
-        $converted = [];
+        $converted = [
+            'queries' => [],
+            'params' => [],
+        ];
 
         foreach ($fields as $alias => $query) {
-            $converted[] = $alias . " " . TableAliases::AS->value . " " . "(" . $query->getQuery() . ")";
+            $converted['queries'][] = $alias . " " . TableAliases::AS->value . " " . "(" . $query->getQuery() . ")";
+            $converted['params'] = array_merge($converted['params'], $query->getParams());
         }
 
         return $converted;

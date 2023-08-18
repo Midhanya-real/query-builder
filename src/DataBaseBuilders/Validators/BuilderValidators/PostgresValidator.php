@@ -9,6 +9,7 @@ use App\DataBaseBuilders\Services\BodyConverterService\JoinBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\OrderBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\SelectBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\TableBodyConverter;
+use App\DataBaseBuilders\Services\BodyConverterService\UnionBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\UpdateBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\WhereBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\WithBodyConverter;
@@ -75,5 +76,10 @@ class PostgresValidator
     public static function getValidWithBody(array $body): array
     {
         return WithBodyConverter::convert($body);
+    }
+
+    public static function getValidUnionBody(array $body): array
+    {
+        return UnionBodyConverter::convert($body);
     }
 }

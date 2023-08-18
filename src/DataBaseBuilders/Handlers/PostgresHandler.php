@@ -70,9 +70,9 @@ class PostgresHandler
         return $this;
     }
 
-    public function orWhere(array $body): static
+    public function orWhere(array|string $expression): static
     {
-        $body = PostgresValidator::getValidUpdateBody($body);
+        $body = PostgresValidator::getValidWhereBody($expression);
         $query = $this->queryBuilder->orWhere($body['fields'], $body['values']);
 
         $this->pool->setQueries($query);
@@ -118,9 +118,9 @@ class PostgresHandler
         return $this;
     }
 
-    public function groupBy(array $body): static
+    public function groupBy(array $groupColumns): static
     {
-        $body = PostgresValidator::getValidSelectBody($body);
+        $body = PostgresValidator::getValidSelectBody($groupColumns);
         $query = $this->queryBuilder->groupBy($body);
 
         $this->pool->setQueries($query);
@@ -128,9 +128,9 @@ class PostgresHandler
         return $this;
     }
 
-    public function orderBy(array $body): static
+    public function orderBy(array $orderValues): static
     {
-        $body = PostgresValidator::getValidOrderBody($body);
+        $body = PostgresValidator::getValidOrderBody($orderValues);
         $query = $this->queryBuilder->orderBy($body);
 
         $this->pool->setQueries($query);
@@ -148,10 +148,10 @@ class PostgresHandler
         return $this;
     }
 
-    public function with(array $body): static
+    public function with(array $subQuery): static
     {
-        $body = PostgresValidator::getValidWithBody($body);
-        $query = $this->queryBuilder->with($body);
+        $body = PostgresValidator::getValidWithBody($subQuery);
+        $query = $this->queryBuilder->with($body['queries'], $body['params']);
 
         $this->pool->setQueries($query);
 
@@ -161,6 +161,16 @@ class PostgresHandler
     public function like(string $pattern): static
     {
         $query = $this->queryBuilder->like($pattern);
+
+        $this->pool->setQueries($query);
+
+        return $this;
+    }
+
+    public function union(array $queries): static
+    {
+        $body = PostgresValidator::getValidUnionBody($queries);
+        $query = $this->queryBuilder->union($body['queries'], $body['params']);
 
         $this->pool->setQueries($query);
 

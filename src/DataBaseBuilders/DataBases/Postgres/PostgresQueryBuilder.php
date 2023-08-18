@@ -13,6 +13,7 @@ use App\DataBaseBuilders\DataBases\Postgres\Methods\Offset;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\OrderBy;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\OutJoin;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Select;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\Union;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Update;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Where;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\With;
@@ -26,6 +27,7 @@ use App\DataBaseBuilders\Services\RawQueryBuilderService\RawJoinBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawLimitBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOrWhereBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawSelectBuilder;
+use App\DataBaseBuilders\Services\RawQueryBuilderService\RawUnionBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawUpdateBuilder;
 
 class PostgresQueryBuilder extends Builder implements PostgresQueryBuilderInterface
@@ -232,9 +234,9 @@ class PostgresQueryBuilder extends Builder implements PostgresQueryBuilderInterf
         return $having;
     }
 
-    public function with(array $fields): Query
+    public function with(array $fields, array $values): Query
     {
-        $with = $this->createMethod(With::class, null, $fields)
+        $with = $this->createMethod(With::class, null, $fields, $values)
             ->getQuery();
 
         $rawQuery = $this->createRawBuilder(RawGroupByBuilder::class, $with)
@@ -260,5 +262,19 @@ class PostgresQueryBuilder extends Builder implements PostgresQueryBuilderInterf
         $like->setRawQuery($rawQuery);
 
         return $like;
+    }
+
+    public function union(array $fields, $values): Query
+    {
+        $union = $this->createMethod(Union::class, null, $fields, $values)
+            ->getQuery();
+
+        $rawQuery = $this->createRawBuilder(RawUnionBuilder::class, $union)
+            ->setFields()
+            ->getRawQuery();
+
+        $union->setRawQuery($rawQuery);
+
+        return $union;
     }
 }

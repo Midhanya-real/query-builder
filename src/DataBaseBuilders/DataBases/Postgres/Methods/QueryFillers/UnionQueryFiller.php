@@ -5,16 +5,15 @@ namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 use App\DataBaseBuilders\Enums\TableAliases;
 use App\DataBaseBuilders\QueryModels\Query;
 
-class WithQueryFiller extends AbstractQueryFiller
+class UnionQueryFiller extends AbstractQueryFiller
 {
 
     protected function setQuery(?string $table, ?array $fields, ?array $values): Query
     {
         return $this->query
-            ->setMethod(TableAliases::WITH->value)
+            ->setMethod(TableAliases::UNION->value)
             ->setFields($fields)
             ->setValues($values);
-
     }
 
     public function getQuery(?string $table, ?array $fields, ?array $values): Query

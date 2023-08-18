@@ -7,10 +7,20 @@ $dotenv->load();
 
 $builder = new \App\QueryBuilder();
 
-$query = $builder->createBuilder()->select('persons')->andWhere('name')->like('%re%')->getQuery();
+$query1 = $builder->createBuilder()
+    ->select('products', ['product_id', 'product_name'])
+    ->andWhere(['product_id' => 24])
+    ->getQuery();
 
-$results = $builder->fetch($query)->all();
+$query2 = $builder->createBuilder()
+    ->select('products', ['category_id', 'category_name'])
+    ->andWhere(['category_name' => 'Hardware'])
+    ->getQuery();
+
+$unionQuery = $builder->createBuilder()->with(['query1' => $query1, 'query2' => $query2])->getQuery();
+
+var_dump($unionQuery->getQuery(true));
 
 echo '<pre>';
-print_r($results);
+print_r($unionQuery->getParams());
 echo '</pre>';
