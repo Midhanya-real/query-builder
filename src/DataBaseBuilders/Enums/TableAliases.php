@@ -13,6 +13,7 @@ enum TableAliases: string
     case WITH = 'WITH';
     case UNION = 'UNION';
     case INTERSECT = 'INTERSECT';
+    case EXCEPT = 'EXCEPT';
     case ON = 'ON';
     case AS = 'AS';
     case ALL = '*';

@@ -187,6 +187,16 @@ class PostgresHandler
         return $this;
     }
 
+    public function except(array $queries): static
+    {
+        $body = PostgresValidator::getValidUnionBody($queries);
+        $query = $this->queryBuilder->except($body['queries'], $body['params']);
+
+        $this->pool->setQueries($query);
+
+        return $this;
+    }
+
     public function getQuery(): Pool
     {
         return $this->pool;

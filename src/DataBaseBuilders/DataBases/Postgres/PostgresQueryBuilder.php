@@ -3,6 +3,7 @@
 namespace App\DataBaseBuilders\DataBases\Postgres;
 
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Delete;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\Except;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\GroupBy;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Having;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Insert;
@@ -291,5 +292,19 @@ class PostgresQueryBuilder extends Builder implements PostgresQueryBuilderInterf
         $intersect->setRawQuery($rawQuery);
 
         return $intersect;
+    }
+
+    public function except(array $fields, array $values): Query
+    {
+        $except = $this->createMethod(Except::class, null, $fields, $values)
+            ->getQuery();
+
+        $rawQuery = $this->createRawBuilder(RawUnionBuilder::class, $except)
+            ->setFields()
+            ->getRawQuery();
+
+        $except->setRawQuery($rawQuery);
+
+        return $except;
     }
 }

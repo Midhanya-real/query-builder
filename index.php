@@ -17,7 +17,7 @@ $query2 = $builder->createBuilder()
     ->andWhere(['category_name' => 'Hardware'])
     ->getQuery();
 
-$unionQuery = $builder->createBuilder()->intersect(['query1' => $query1, 'query2' => $query2])->getQuery();
+$unionQuery = $builder->createBuilder()->except(['query1' => $query1, 'query2' => $query2])->getQuery();
 
 var_dump($unionQuery->getQuery(true));
 
