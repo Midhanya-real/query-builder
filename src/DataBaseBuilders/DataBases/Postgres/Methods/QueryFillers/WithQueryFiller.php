@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
-use App\DataBaseBuilders\Enums\TableAliases;
+use App\DataBaseBuilders\Enums\LinkOperators;
 use App\DataBaseBuilders\QueryModels\Query;
 
 class WithQueryFiller extends AbstractQueryFiller
@@ -11,7 +11,7 @@ class WithQueryFiller extends AbstractQueryFiller
     protected function setQuery(?string $table, ?array $fields, ?array $values): Query
     {
         return $this->query
-            ->setMethod(TableAliases::WITH->value)
+            ->setMethod(LinkOperators::WITH->value)
             ->setFields($fields)
             ->setValues($values);
 

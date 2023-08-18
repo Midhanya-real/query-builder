@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
-use App\DataBaseBuilders\Enums\TableAliases;
+use App\DataBaseBuilders\Enums\LinkOperators;
 use App\DataBaseBuilders\QueryModels\Query;
 
 class ExceptQueryFiller extends AbstractQueryFiller
@@ -11,7 +11,7 @@ class ExceptQueryFiller extends AbstractQueryFiller
     protected function setQuery(?string $table, ?array $fields, ?array $values): Query
     {
         return $this->query
-            ->setMethod(TableAliases::EXCEPT->value)
+            ->setMethod(LinkOperators::EXCEPT->value)
             ->setFields($fields)
             ->setValues($values);
     }
