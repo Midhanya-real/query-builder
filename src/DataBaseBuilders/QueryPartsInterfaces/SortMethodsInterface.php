@@ -20,5 +20,5 @@ interface SortMethodsInterface
 
     public function having(array $fields, array $values): Query;
 
-    public function like(array $fields, array $values): Query;
+    public function like(string $pattern): Query;
 }

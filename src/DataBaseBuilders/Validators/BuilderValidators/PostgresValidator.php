@@ -10,6 +10,7 @@ use App\DataBaseBuilders\Services\BodyConverterService\OrderBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\SelectBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\TableBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\UpdateBodyConverter;
+use App\DataBaseBuilders\Services\BodyConverterService\WhereBodyConverter;
 use App\DataBaseBuilders\Services\BodyConverterService\WithBodyConverter;
 
 class PostgresValidator
@@ -46,6 +47,19 @@ class PostgresValidator
     public static function getValidUpdateBody(array $body): array
     {
         return UpdateBodyConverter::convert($body);
+    }
+
+    public static function getValidWhereBody(array|string $body): array
+    {
+        $validBody = [];
+        if (is_array($body)) {
+            $validBody = UpdateBodyConverter::convert($body);
+        } else {
+            $validBody['fields'] = [$body];
+            $validBody['values'] = [];
+        }
+
+        return $validBody;
     }
 
     public static function getValidOrderBody(array $body): array

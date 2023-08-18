@@ -60,9 +60,9 @@ class PostgresHandler
         return $this;
     }
 
-    public function andWhere(array $body): static
+    public function andWhere(array|string $expression): static
     {
-        $body = PostgresValidator::getValidUpdateBody($body);
+        $body = PostgresValidator::getValidWhereBody($expression);
         $query = $this->queryBuilder->andWhere($body['fields'], $body['values']);
 
         $this->pool->setQueries($query);
@@ -158,10 +158,9 @@ class PostgresHandler
         return $this;
     }
 
-    public function like(array $body): static
+    public function like(string $pattern): static
     {
-        $body = PostgresValidator::getValidInsertBody($body);
-        $query = $this->queryBuilder->like($body['fields'], $body['values']);
+        $query = $this->queryBuilder->like($pattern);
 
         $this->pool->setQueries($query);
 

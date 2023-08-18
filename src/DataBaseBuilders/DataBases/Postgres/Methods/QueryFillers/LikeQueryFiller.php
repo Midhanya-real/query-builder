@@ -12,8 +12,7 @@ class LikeQueryFiller extends AbstractQueryFiller
     {
         return $this->query
             ->setMethod(SortOperators::LIKE->value)
-            ->setFields($fields)
-            ->setValues($values);
+            ->setValues($fields);
     }
 
     public function getQuery(?string $table, ?array $fields, ?array $values): Query

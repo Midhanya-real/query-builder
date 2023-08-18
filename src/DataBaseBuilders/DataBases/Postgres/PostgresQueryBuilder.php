@@ -23,7 +23,6 @@ use App\DataBaseBuilders\Services\RawQueryBuilderService\RawGroupByBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawHavingBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawInsertBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawJoinBuilder;
-use App\DataBaseBuilders\Services\RawQueryBuilderService\RawLikeBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawLimitBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOrWhereBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawSelectBuilder;
@@ -248,14 +247,14 @@ class PostgresQueryBuilder extends Builder implements PostgresQueryBuilderInterf
         return $with;
     }
 
-    public function like(array $fields, array $values): Query
+    public function like(string $pattern): Query
     {
-        $like = $this->createMethod(Like::class, null, $fields, $values)
+        $like = $this->createMethod(Like::class, null, [$pattern])
             ->getQuery();
 
-        $rawQuery = $this->createRawBuilder(RawLikeBuilder::class, $like)
+        $rawQuery = $this->createRawBuilder(RawLimitBuilder::class, $like)
             ->setMethod()
-            ->setFields()
+            ->setValues()
             ->getRawQuery();
 
         $like->setRawQuery($rawQuery);
