@@ -17,5 +17,8 @@ interface SortMethodsInterface
     public function groupBy(array $groupColumns): Query;
 
     public function orderBy(array $orderFields): Query;
-    public function having(array $fields, array $values);
+
+    public function having(array $fields, array $values): Query;
+
+    public function like(array $fields, array $values): Query;
 }

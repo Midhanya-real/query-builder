@@ -3,27 +3,15 @@
 namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
 use App\DataBaseBuilders\Enums\LogicalOperators;
-use App\DataBaseBuilders\QueryModels\Query;
 
-class RawAndWhereBuilder implements RawBuilderInterface
+class RawAndWhereBuilder extends AbstractRawBuilder
 {
     private string $rawQuery = '';
-
-    public function __construct(
-        private readonly Query $query,
-    )
-    {
-    }
 
     public function setMethod(): static
     {
         $this->rawQuery .= $this->query->getMethod() . " ";
 
-        return $this;
-    }
-
-    public function setTable(): static
-    {
         return $this;
     }
 
@@ -33,11 +21,6 @@ class RawAndWhereBuilder implements RawBuilderInterface
 
         $this->rawQuery .= implode(" {$and} ", $this->query->getFields()) . " ";
 
-        return $this;
-    }
-
-    public function setValues(): static
-    {
         return $this;
     }
 

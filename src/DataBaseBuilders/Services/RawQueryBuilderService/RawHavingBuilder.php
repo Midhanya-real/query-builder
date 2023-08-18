@@ -2,17 +2,9 @@
 
 namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
-use App\DataBaseBuilders\QueryModels\Query;
-
-class RawHavingBuilder implements RawBuilderInterface
+class RawHavingBuilder extends AbstractRawBuilder
 {
     private string $rowQuery = '';
-
-    public function __construct(
-        private readonly Query $query,
-    )
-    {
-    }
 
     public function setMethod(): static
     {
@@ -21,20 +13,10 @@ class RawHavingBuilder implements RawBuilderInterface
         return $this;
     }
 
-    public function setTable(): static
-    {
-        return $this;
-    }
-
     public function setFields(): static
     {
         $this->rowQuery .= implode(', ', $this->query->getFields()) . " ";
 
-        return $this;
-    }
-
-    public function setValues(): static
-    {
         return $this;
     }
 

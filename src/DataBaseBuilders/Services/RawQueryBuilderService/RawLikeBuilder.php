@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
-class RawLimitBuilder extends AbstractRawBuilder
+class RawLikeBuilder extends AbstractRawBuilder
 {
     private string $rowQuery = '';
 
@@ -13,10 +13,9 @@ class RawLimitBuilder extends AbstractRawBuilder
         return $this;
     }
 
-    public function setValues(): static
+    public function setFields(): static
     {
-        $this->rowQuery .= "?" . " ";
-
+        $this->rowQuery .= "'" . implode(" ", $this->query->getFields()) . "'" . " ";
         return $this;
     }
 

@@ -7,6 +7,7 @@ use App\DataBaseBuilders\DataBases\Postgres\Methods\GroupBy;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Having;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Insert;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Join;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\Like;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Limit;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Offset;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\OrderBy;
@@ -22,6 +23,7 @@ use App\DataBaseBuilders\Services\RawQueryBuilderService\RawGroupByBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawHavingBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawInsertBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawJoinBuilder;
+use App\DataBaseBuilders\Services\RawQueryBuilderService\RawLikeBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawLimitBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawOrWhereBuilder;
 use App\DataBaseBuilders\Services\RawQueryBuilderService\RawSelectBuilder;
@@ -244,5 +246,20 @@ class PostgresQueryBuilder extends Builder implements PostgresQueryBuilderInterf
         $with->setRawQuery($rawQuery);
 
         return $with;
+    }
+
+    public function like(array $fields, array $values): Query
+    {
+        $like = $this->createMethod(Like::class, null, $fields, $values)
+            ->getQuery();
+
+        $rawQuery = $this->createRawBuilder(RawLikeBuilder::class, $like)
+            ->setMethod()
+            ->setFields()
+            ->getRawQuery();
+
+        $like->setRawQuery($rawQuery);
+
+        return $like;
     }
 }

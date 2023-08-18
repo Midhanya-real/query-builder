@@ -4,7 +4,6 @@ namespace App\DataBaseBuilders\Handlers;
 
 use App\DataBaseBuilders\DataBases\Postgres\PostgresQueryBuilderInterface;
 use App\DataBaseBuilders\QueryModels\Pool;
-use App\DataBaseBuilders\QueryModels\Query;
 use App\DataBaseBuilders\Validators\BuilderValidators\PostgresValidator;
 
 class PostgresHandler
@@ -149,10 +148,20 @@ class PostgresHandler
         return $this;
     }
 
-    public function with(array $query): static
+    public function with(array $body): static
     {
-        $body = PostgresValidator::getValidWithBody($query);
+        $body = PostgresValidator::getValidWithBody($body);
         $query = $this->queryBuilder->with($body);
+
+        $this->pool->setQueries($query);
+
+        return $this;
+    }
+
+    public function like(array $body): static
+    {
+        $body = PostgresValidator::getValidInsertBody($body);
+        $query = $this->queryBuilder->like($body['fields'], $body['values']);
 
         $this->pool->setQueries($query);
 
