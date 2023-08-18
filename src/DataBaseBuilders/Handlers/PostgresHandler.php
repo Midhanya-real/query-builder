@@ -148,9 +148,9 @@ class PostgresHandler
         return $this;
     }
 
-    public function with(array $subQuery): static
+    public function with(array $subQueries): static
     {
-        $body = PostgresValidator::getValidWithBody($subQuery);
+        $body = PostgresValidator::getValidWithBody($subQueries);
         $query = $this->queryBuilder->with($body['queries'], $body['params']);
 
         $this->pool->setQueries($query);
@@ -171,6 +171,16 @@ class PostgresHandler
     {
         $body = PostgresValidator::getValidUnionBody($queries);
         $query = $this->queryBuilder->union($body['queries'], $body['params']);
+
+        $this->pool->setQueries($query);
+
+        return $this;
+    }
+
+    public function intersect(array $queries): static
+    {
+        $body = PostgresValidator::getValidUnionBody($queries);
+        $query = $this->queryBuilder->intersect($body['queries'], $body['params']);
 
         $this->pool->setQueries($query);
 

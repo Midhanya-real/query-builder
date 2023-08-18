@@ -13,4 +13,6 @@ interface LinkMethodsInterface
     public function with(array $fields, array $values): Query;
 
     public function union(array $fields, array $values): Query;
+
+    public function intersect(array $fields, array $values): Query;
 }

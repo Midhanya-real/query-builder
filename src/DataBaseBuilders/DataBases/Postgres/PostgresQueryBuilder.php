@@ -6,6 +6,7 @@ use App\DataBaseBuilders\DataBases\Postgres\Methods\Delete;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\GroupBy;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Having;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Insert;
+use App\DataBaseBuilders\DataBases\Postgres\Methods\Intersect;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Join;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Like;
 use App\DataBaseBuilders\DataBases\Postgres\Methods\Limit;
@@ -276,5 +277,19 @@ class PostgresQueryBuilder extends Builder implements PostgresQueryBuilderInterf
         $union->setRawQuery($rawQuery);
 
         return $union;
+    }
+
+    public function intersect(array $fields, array $values): Query
+    {
+        $intersect = $this->createMethod(Intersect::class, null, $fields, $values)
+            ->getQuery();
+
+        $rawQuery = $this->createRawBuilder(RawUnionBuilder::class, $intersect)
+            ->setFields()
+            ->getRawQuery();
+
+        $intersect->setRawQuery($rawQuery);
+
+        return $intersect;
     }
 }
