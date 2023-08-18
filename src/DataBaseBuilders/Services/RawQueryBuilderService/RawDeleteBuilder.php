@@ -3,17 +3,11 @@
 namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
 use App\DataBaseBuilders\Enums\TableAliases;
-use App\DataBaseBuilders\Models\Query;
+use App\DataBaseBuilders\QueryModels\Query;
 
-class RawDeleteBuilder implements RawBuilderInterface
+class RawDeleteBuilder extends AbstractRawBuilder
 {
     private string $rowQuery = '';
-
-    public function __construct(
-        private readonly Query $query,
-    )
-    {
-    }
 
     public function setMethod(): static
     {
@@ -26,16 +20,6 @@ class RawDeleteBuilder implements RawBuilderInterface
     {
         $this->rowQuery .= TableAliases::FROM->value . " " . $this->query->getTable() . " ";
 
-        return $this;
-    }
-
-    public function setFields(): static
-    {
-        return $this;
-    }
-
-    public function setValues(): static
-    {
         return $this;
     }
 

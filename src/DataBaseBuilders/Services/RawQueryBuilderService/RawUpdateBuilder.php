@@ -3,17 +3,10 @@
 namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
 use App\DataBaseBuilders\Enums\TableAliases;
-use App\DataBaseBuilders\Models\Query;
 
-class RawUpdateBuilder implements RawBuilderInterface
+class RawUpdateBuilder extends AbstractRawBuilder
 {
     private string $rowQuery = '';
-
-    public function __construct(
-        private readonly Query $query,
-    )
-    {
-    }
 
     public function setMethod(): static
     {
@@ -33,11 +26,6 @@ class RawUpdateBuilder implements RawBuilderInterface
     {
         $this->rowQuery .= TableAliases::SET->value . " " . implode(', ', $this->query->getFields());
 
-        return $this;
-    }
-
-    public function setValues(): static
-    {
         return $this;
     }
 

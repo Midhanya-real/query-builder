@@ -9,4 +9,6 @@ enum SortOperators: string
     case GROUP_BY = 'GROUP BY';
     case LIMIT = 'LIMIT';
     case OFFSET = 'OFFSET';
+    case HAVING = 'HAVING';
+    case LIKE = 'LIKE';
 }

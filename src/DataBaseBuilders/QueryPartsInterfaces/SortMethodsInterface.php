@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\QueryPartsInterfaces;
 
-use App\DataBaseBuilders\Models\Query;
+use App\DataBaseBuilders\QueryModels\Query;
 
 interface SortMethodsInterface
 {
@@ -17,4 +17,8 @@ interface SortMethodsInterface
     public function groupBy(array $groupColumns): Query;
 
     public function orderBy(array $orderFields): Query;
+
+    public function having(array $fields, array $values): Query;
+
+    public function like(string $pattern): Query;
 }

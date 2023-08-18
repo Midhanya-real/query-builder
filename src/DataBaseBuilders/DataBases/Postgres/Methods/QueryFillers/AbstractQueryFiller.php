@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers;
 
-use App\DataBaseBuilders\Models\Query;
+use App\DataBaseBuilders\QueryModels\Query;
 
 abstract class AbstractQueryFiller
 {
@@ -11,11 +11,6 @@ abstract class AbstractQueryFiller
     )
     {
 
-    }
-
-    protected final static function isAlias(string|array $table): bool
-    {
-        return is_array($table);
     }
 
     abstract protected function setQuery(null|string $table, null|array $fields, null|array $values): Query;

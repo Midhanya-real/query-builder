@@ -3,7 +3,7 @@
 namespace App\DataBaseBuilders\Handlers;
 
 use App\DataBaseBuilders\DataBases\Postgres\PostgresQueryBuilderInterface;
-use App\DataBaseBuilders\Models\Pool;
+use App\DataBaseBuilders\QueryModels\Pool;
 use App\DataBaseBuilders\Validators\BuilderValidators\PostgresValidator;
 
 class PostgresHandler
@@ -60,9 +60,9 @@ class PostgresHandler
         return $this;
     }
 
-    public function andWhere(array $body): static
+    public function andWhere(array|string $expression): static
     {
-        $body = PostgresValidator::getValidUpdateBody($body);
+        $body = PostgresValidator::getValidWhereBody($expression);
         $query = $this->queryBuilder->andWhere($body['fields'], $body['values']);
 
         $this->pool->setQueries($query);
@@ -70,9 +70,9 @@ class PostgresHandler
         return $this;
     }
 
-    public function orWhere(array $body): static
+    public function orWhere(array|string $expression): static
     {
-        $body = PostgresValidator::getValidUpdateBody($body);
+        $body = PostgresValidator::getValidWhereBody($expression);
         $query = $this->queryBuilder->orWhere($body['fields'], $body['values']);
 
         $this->pool->setQueries($query);
@@ -118,9 +118,9 @@ class PostgresHandler
         return $this;
     }
 
-    public function groupBy(array $body): static
+    public function groupBy(array $groupColumns): static
     {
-        $body = PostgresValidator::getValidSelectBody($body);
+        $body = PostgresValidator::getValidSelectBody($groupColumns);
         $query = $this->queryBuilder->groupBy($body);
 
         $this->pool->setQueries($query);
@@ -128,10 +128,69 @@ class PostgresHandler
         return $this;
     }
 
-    public function orderBy(array $body): static
+    public function orderBy(array $orderValues): static
     {
-        $body = PostgresValidator::getValidOrderBody($body);
+        $body = PostgresValidator::getValidOrderBody($orderValues);
         $query = $this->queryBuilder->orderBy($body);
+
+        $this->pool->setQueries($query);
+
+        return $this;
+    }
+
+    public function having(array $agrFunc, string $alias, string $value): static
+    {
+        $body = PostgresValidator::getValidHavingBody($agrFunc, $alias, $value);
+        $query = $this->queryBuilder->having($body['fields'], $body['values']);
+
+        $this->pool->setQueries($query);
+
+        return $this;
+    }
+
+    public function with(array $subQueries): static
+    {
+        $body = PostgresValidator::getValidWithBody($subQueries);
+        $query = $this->queryBuilder->with($body['queries'], $body['params']);
+
+        $this->pool->setQueries($query);
+
+        return $this;
+    }
+
+    public function like(string $pattern): static
+    {
+        $query = $this->queryBuilder->like($pattern);
+
+        $this->pool->setQueries($query);
+
+        return $this;
+    }
+
+    public function union(array $queries): static
+    {
+        $body = PostgresValidator::getValidUnionBody($queries);
+        $query = $this->queryBuilder->union($body['queries'], $body['params']);
+
+        $this->pool->setQueries($query);
+
+        return $this;
+    }
+
+    public function intersect(array $queries): static
+    {
+        $body = PostgresValidator::getValidUnionBody($queries);
+        $query = $this->queryBuilder->intersect($body['queries'], $body['params']);
+
+        $this->pool->setQueries($query);
+
+        return $this;
+    }
+
+    public function except(array $queries): static
+    {
+        $body = PostgresValidator::getValidUnionBody($queries);
+        $query = $this->queryBuilder->except($body['queries'], $body['params']);
 
         $this->pool->setQueries($query);
 

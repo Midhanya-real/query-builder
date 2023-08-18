@@ -2,20 +2,15 @@
 
 namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
-class RawGroupByBuilder extends AbstractRawBuilder
+class RawUnionBuilder extends AbstractRawBuilder
 {
     private string $rowQuery = '';
 
-    public function setMethod(): static
-    {
-        $this->rowQuery .= $this->query->getMethod() . " ";
-
-        return $this;
-    }
-
     public function setFields(): static
     {
-        $this->rowQuery .= implode(', ', $this->query->getFields()) . " ";
+        $method = $this->query->getMethod();
+
+        $this->rowQuery .= "(" . implode(" {$method} ", $this->query->getFields()) . ")" . " ";
 
         return $this;
     }

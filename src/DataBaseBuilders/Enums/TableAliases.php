@@ -8,8 +8,6 @@ enum TableAliases: string
     case INTO = 'INTO';
     case VALUES = 'VALUES';
     case SET = 'SET';
-    case JOIN = 'JOIN';
-    case FULL_OUTER_JOIN = 'FULL OUTER JOIN';
     case ON = 'ON';
     case AS = 'AS';
     case ALL = '*';

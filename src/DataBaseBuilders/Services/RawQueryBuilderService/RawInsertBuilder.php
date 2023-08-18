@@ -3,17 +3,11 @@
 namespace App\DataBaseBuilders\Services\RawQueryBuilderService;
 
 use App\DataBaseBuilders\Enums\TableAliases;
-use App\DataBaseBuilders\Models\Query;
+use App\DataBaseBuilders\QueryModels\Query;
 
-class RawInsertBuilder implements RawBuilderInterface
+class RawInsertBuilder extends AbstractRawBuilder
 {
     private string $rowQuery = '';
-
-    public function __construct(
-        private readonly Query $query,
-    )
-    {
-    }
 
     public function setMethod(): static
     {

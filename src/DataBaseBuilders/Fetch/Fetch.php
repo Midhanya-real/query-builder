@@ -2,7 +2,7 @@
 
 namespace App\DataBaseBuilders\Fetch;
 
-use App\DataBaseBuilders\Models\Pool;
+use App\DataBaseBuilders\QueryModels\Pool;
 use PDO;
 
 class Fetch
@@ -16,7 +16,7 @@ class Fetch
 
     public function all(): bool|array
     {
-        $query = $this->connection->prepare($this->pool->getQuery());
+        $query = $this->connection->prepare($this->pool->getQuery(end: true));
         $query->execute($this->pool->getParams());
 
         return $query->fetchAll(PDO::FETCH_CLASS);
@@ -24,7 +24,7 @@ class Fetch
 
     public function first(): object
     {
-        $query = $this->connection->prepare($this->pool->getQuery());
+        $query = $this->connection->prepare($this->pool->getQuery(end: true));
         $query->execute($this->pool->getParams());
 
         return $query->fetchObject();
@@ -32,7 +32,7 @@ class Fetch
 
     public function save(): bool
     {
-        $query = $this->connection->prepare($this->pool->getQuery());
+        $query = $this->connection->prepare($this->pool->getQuery(end: true));
         $query->execute($this->pool->getParams());
 
         return true;

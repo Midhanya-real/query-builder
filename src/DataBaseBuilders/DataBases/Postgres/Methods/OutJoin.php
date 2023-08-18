@@ -3,7 +3,7 @@
 namespace App\DataBaseBuilders\DataBases\Postgres\Methods;
 
 use App\DataBaseBuilders\DataBases\Postgres\Methods\QueryFillers\OutJoinQueryFiller;
-use App\DataBaseBuilders\Models\Query;
+use App\DataBaseBuilders\QueryModels\Query;
 
 class OutJoin extends AbstractMethod
 {
