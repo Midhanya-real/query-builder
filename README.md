@@ -1,18 +1,21 @@
-<p>
+<h3>
 The construction of a query begins with the creation of an object:
-
+</h3>
+<pre>
 $builder = new \App\QueryBuilder();
-</p>
+</pre>
 
-<p>
+<h3>
 The request formation begins with calling the "createBuilder()" method:
+</h3>
 
+<pre>
 $query = $builder->createBuilder()->...
-</p>
+</pre>
 
-<p>
+<h3>
 To get the result, you need to call the "fetch" method, with which you can call one of the following three methods:
-</p>
+</h3>
 <ul>
 <li>
 $builder->fetch($query)->all(); - all results
