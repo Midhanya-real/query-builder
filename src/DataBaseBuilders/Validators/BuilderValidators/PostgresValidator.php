@@ -54,7 +54,7 @@ class PostgresValidator
     {
         $validBody = [];
         if (is_array($body)) {
-            $validBody = UpdateBodyConverter::convert($body);
+            $validBody = WhereBodyConverter::convert($body);
         } else {
             $validBody['fields'] = [$body];
             $validBody['values'] = [];
